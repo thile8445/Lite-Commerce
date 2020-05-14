@@ -10,6 +10,7 @@ namespace LiteCommerce.Admin.Controllers
     {
 
         // GET: Dashboard
+        [Authorize]
         public ActionResult Index()
         {
             return View();

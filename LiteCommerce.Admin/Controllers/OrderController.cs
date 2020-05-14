@@ -13,6 +13,10 @@ namespace LiteCommerce.Admin.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();

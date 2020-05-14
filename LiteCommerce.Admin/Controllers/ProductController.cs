@@ -9,6 +9,7 @@ namespace LiteCommerce.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Product
+        [Authorize]
         public ActionResult Index()
         {
             return View();

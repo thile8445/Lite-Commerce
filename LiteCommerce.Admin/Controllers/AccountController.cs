@@ -19,6 +19,16 @@ namespace LiteCommerce.Admin.Controllers
         }
         public ActionResult SignOut()
         {
+            return RedirectToAction("SignIn");
+        }
+        [AllowAnonymous]
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
             return View();
         }
     }

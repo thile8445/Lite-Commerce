@@ -7143,6 +7143,11 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Shipper\Index.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\SignOut.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
