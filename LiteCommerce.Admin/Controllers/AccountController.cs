@@ -9,10 +9,12 @@ namespace LiteCommerce.Admin.Controllers
     public class AccountController : Controller
     {
         // GET: Account
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
+        [Authorize]
         public ActionResult ChangePassword()
         {
             return View();

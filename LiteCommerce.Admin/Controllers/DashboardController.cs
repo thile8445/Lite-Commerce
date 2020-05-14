@@ -13,6 +13,7 @@ namespace LiteCommerce.Admin.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            //return RedirectToAction("~/Account/SignIn");
             return View();
         }
     }

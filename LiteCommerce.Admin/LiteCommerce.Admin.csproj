@@ -153,7 +153,6 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
@@ -6643,9 +6642,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Themes\AdminLTE\bower_components\bootstrap-colorpicker\.bower.json" />
     <Content Include="Themes\AdminLTE\bower_components\bootstrap-colorpicker\.editorconfig" />
     <Content Include="Themes\AdminLTE\bower_components\bootstrap-colorpicker\.github\CODE_OF_CONDUCT.md" />
