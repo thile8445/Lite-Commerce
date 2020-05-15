@@ -6,11 +6,12 @@ using System.Web.Mvc;
 
 namespace LiteCommerce.Admin.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
 
         // GET: Dashboard
-        [Authorize]
+        
         public ActionResult Index()
         {
             //return RedirectToAction("~/Account/SignIn");

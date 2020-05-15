@@ -6,10 +6,11 @@ using System.Web.Mvc;
 
 namespace LiteCommerce.Admin.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         // GET: Product
-        [Authorize]
+        
         public ActionResult Index()
         {
             return View();

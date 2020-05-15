@@ -6631,6 +6631,7 @@
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Themes\Css\main-style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -7144,6 +7145,8 @@
     <Content Include="Views\Account\SignOut.cshtml" />
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Supplier\Input.cshtml" />
+    <Content Include="Views\Customer\Input.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
