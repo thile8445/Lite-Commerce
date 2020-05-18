@@ -18,8 +18,16 @@ namespace LiteCommerce.Admin.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create()
+        public ActionResult Create(string id = "")
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                ViewBag.Title = "Create a Order";
+            }
+            else
+            {
+                ViewBag.Title = "Edit a Order";
+            }
             return View();
         }
     }
