@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<LiteCommerce.DomainModels.Product>
+@{
+    int i = 0;
     ViewBag.Title = "Manage Product";
 }
 <div class="box box-primary">
@@ -33,39 +35,46 @@
                         <input type="checkbox" />
                     </th>
                     <th style="width:50px">#</th>
-                    <th style="width:auto">Name</th>
-                    <th style="width:200px">Address</th>
-                    <th style="width:200px">Contact Info</th>
+                    <th style="width:150px">Name</th>
+                    <th style="width:150px">QuantityPerUnit</th>
+                    <th style="width:120px">UnitPrice</th>
+                    <th style="width:300px">Description</th>
+                    <th style="width:auto">Image</th>
                     <th style="width:80px"></th>
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 1; i <= 3; i++)
+                @foreach (var product in Model)
                 {
                     <tr>
                         <td>
                             <input type="checkbox" />
                         </td>
-                        <td>@i</td>
+                        <td>@(++i)</td>
                         <td>
                             <span class="lc-company-name">
-                                New Orleans Cajun Delights
+                               @product.ProductName
                             </span>
-                            <span class="lc-contact-title">
-                                Order Administrator:
-                            </span>
-                            <span class="lc-contact-name">
-                                Shelley Burke
-                            </span>
+                            
                         </td>
                         <td>
-                            <span style="display:block">P.O. Box 78934</span>
-                            <span>New Orleans - USA</span>
+                            <span class="lc-company-name">
+                                @product.QuantityPerUnit
+                            </span>
+
                         </td>
                         <td>
-                            <p style="display:block"><i class="fa fa-phone"></i> (100) 555-4822</p>
-                            <p style="display:block"><i class="fa fa-fax"></i> (100) 333-665411</p>
-                            <p style="display:block"><i class="fa fa-home"></i> https://neworleans.com</p>
+                            <span class="lc-company-name">
+                                @product.UnitPrice
+                            </span>
+
+                        </td>
+                        <td>
+                            <span style="display:block">@product.Descriptions</span>
+                            
+                        </td>
+                        <td>
+                            <img src="@product.PhotoPath"/>
                         </td>
                         <td class="text-right">
                             <a class="btn btn-sm btn-default" href="~/Product/Input/@i/">

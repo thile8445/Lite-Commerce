@@ -1,5 +1,7 @@
-﻿@{
+﻿@model IEnumerable<LiteCommerce.DomainModels.Customer>
+@{
     ViewBag.Title = "Customers";
+    int i = 0;
 }
 <div class="box box-primary">
     <div class="box-body">
@@ -15,7 +17,7 @@
 </div>
 <div class="container-fluid row lc-margin-bottom">
     <div class="col-sm-8">
-        There are <b>1,000</b> Customers. Page 1/100
+        There are <b>@ViewBag.rowCount</b> Customers. Page 1/100
     </div>
     <div class="col-md-4 text-right">
         <div class="btn-group">
@@ -40,32 +42,32 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 1; i <= 3; i++)
+                @foreach (var customer in Model)
                 {
                     <tr>
                         <td>
                             <input type="checkbox" />
                         </td>
-                        <td>@i</td>
+                        <td>@(++i)</td>
                         <td>
                             <span class="lc-company-name">
-                                New Orleans Cajun Delights
+                                @customer.CompanyName
                             </span>
                             <span class="lc-contact-title">
-                                Order Administrator:
+                                @customer.ContactTitle
                             </span>
                             <span class="lc-contact-name">
-                                Shelley Burke
+                                @customer.ContactName
                             </span>
                         </td>
                         <td>
-                            <span style="display:block">P.O. Box 78934</span>
-                            <span>New Orleans - USA</span>
+                            <span style="display:block">@customer.Address</span>
+                            <span>@customer.Country</span>
                         </td>
                         <td>
-                            <p style="display:block"><i class="fa fa-phone"></i> (100) 555-4822</p>
-                            <p style="display:block"><i class="fa fa-fax"></i> (100) 333-665411</p>
-                            <p style="display:block"><i class="fa fa-home"></i> https://neworleans.com</p>
+                            <p style="display:block"><i class="fa fa-phone"></i> @customer.Phone</p>
+                            <p style="display:block"><i class="fa fa-fax"></i> @customer.Fax</p>
+                            
                         </td>
                         <td class="text-right">
                             <a class="btn btn-sm btn-default" href="~/Customer/Input/@i/">

@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BusinessLayerConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -6632,7 +6633,9 @@
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Themes\Css\main-style.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -7164,6 +7167,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LiteCommerce.BusinessLayers\LiteCommerce.BusinessLayers.csproj">
+      <Project>{0bf16ec8-39f3-40df-bf19-a016f3cbee34}</Project>
+      <Name>LiteCommerce.BusinessLayers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiteCommerce.DomainModels\LiteCommerce.DomainModels.csproj">
+      <Project>{e7ba454d-1044-470e-99b8-1613df889ade}</Project>
+      <Name>LiteCommerce.DomainModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
