@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LiteCommerce.DataLayers.SqlServer;
 namespace LiteCommerce.BusinessLayers
 {
     /// <summary>
@@ -20,11 +19,11 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="connectionString"></param>
         public static void Initialize(string connectionString)
         {
-            SupplierDB = new SupplierDAL(connectionString);
-            CustomerDB = new CustomerDAL(connectionString);
-            ShipperDB = new ShipperDAL(connectionString);
-            CategoryDB =new CategoryDAL(connectionString);
-            ProductDB = new ProductDAL(connectionString);
+            SupplierDB = new DataLayers.SqlServer.SupplierDAL(connectionString);
+            CustomerDB = new DataLayers.SqlServer.CustomerDAL(connectionString);
+            ShipperDB = new DataLayers.SqlServer.ShipperDAL(connectionString);
+            CategoryDB =new DataLayers.SqlServer.CategoryDAL(connectionString);
+            ProductDB = new DataLayers.SqlServer.ProductDAL(connectionString);
         }
         #region Khai báo các thuộc tính giao tiếp với DAL
    
@@ -86,7 +85,7 @@ namespace LiteCommerce.BusinessLayers
                 page = 1;
             if (pageSize < 0)
                 pageSize = 20;
-            rowCount = ShipperDB.Count(searchValue);
+            rowCount = CategoryDB.Count(searchValue);
             return CategoryDB.List(page, pageSize, searchValue);
         }
 

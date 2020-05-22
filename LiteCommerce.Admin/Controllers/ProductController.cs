@@ -1,4 +1,5 @@
-﻿using LiteCommerce.BusinessLayers;
+﻿using LiteCommerce.Admin.Models;
+using LiteCommerce.BusinessLayers;
 using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,20 @@ namespace LiteCommerce.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        
-        public ActionResult Index()
+
+        public ActionResult Index(int page = 1, string searchValue = "")
         {
+            int pageSize = 5;
             int rowCount = 0;
-            List<Product> model = CatalogBLL.ListOfProducts(1, 10, "", out rowCount);
-            ViewBag.rowCount = rowCount;
+            List<Product> ListOfProducts = CatalogBLL.ListOfProducts(page, pageSize, searchValue, out rowCount);
+            var model = new ProductPaginationResult()
+            {
+                Page = page,
+                PageSize = pageSize,
+                RowCount = rowCount,
+                SearchValue = searchValue,
+                Data = ListOfProducts
+            };
             return View(model);
         }
         public ActionResult Input(string id = "")

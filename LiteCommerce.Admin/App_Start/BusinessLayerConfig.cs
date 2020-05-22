@@ -15,6 +15,7 @@ namespace LiteCommerce.Admin
             //TODO : Khởi tạo các BLL khi cần sử dụng đến
             CatalogBLL.Initialize(connectionString);
             EmloyeeBLL.Initialize(connectionString);
+            OrderBLL.Initialize(connectionString);
         }
     }
 }

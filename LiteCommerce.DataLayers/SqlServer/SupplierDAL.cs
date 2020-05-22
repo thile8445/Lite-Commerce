@@ -39,8 +39,29 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public int Count(string searchValue)
         {
-            //TODO : Sữa code count
-            return 30;
+            
+            int count = 0;
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"select count(*) as count from Suppliers where @searchValue = N'' or CompanyName like @searchValue";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                //using(SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                //{
+
+                //        reader.Read();
+                //        count = Convert.ToInt32(reader["count"]);
+
+                //}
+                count = Convert.ToInt32(cmd.ExecuteScalar());
+                connection.Close();
+            }
+            return count;
         }
         /// <summary>
         /// 
@@ -70,14 +91,28 @@ namespace LiteCommerce.DataLayers.SqlServer
         public List<Supplier> List(int page, int pagesize, string searchValue)
         {
             List<Supplier> data = new List<Supplier>();
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 //Tạo lệnh thực thi truy vấn dữ liệu
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "Select * from suppliers";
+                cmd.CommandText = @"SELECT * 
+                        from
+                        (
+	                        select row_number() over(order by CompanyName) as RowNumber,
+			                        Suppliers.*
+	                        from Suppliers
+	                        where (@searchValue =N'') or (CompanyName like @searchValue)
+                        ) as t
+                        where t.RowNumber between  (@page-1)*@pageSize + 1 and @page*@pageSize
+                        order by t.RowNumber";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@page", page);
+                cmd.Parameters.AddWithValue("@pageSize", pagesize);
+                cmd.Parameters.AddWithValue("@searchValue", searchValue);
                 using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
                     while (dbReader.Read())

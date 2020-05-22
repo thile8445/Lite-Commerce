@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteCommerce.Admin", "LiteCommerce.Admin\LiteCommerce.Admin.csproj", "{AF1A5C2B-9C76-4D35-8443-F2FF34416CCD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Studied", "Studied", "{5EDF8D8E-C4A8-454C-90AD-B06A4B79AFF1}"
+	ProjectSection(SolutionItems) = preProject
+		note.txt = note.txt
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteCommerce.DomainModels", "LiteCommerce.DomainModels\LiteCommerce.DomainModels.csproj", "{E7BA454D-1044-470E-99B8-1613DF889ADE}"
 EndProject

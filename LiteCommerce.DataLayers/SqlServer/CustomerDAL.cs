@@ -36,8 +36,22 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <returns></returns>
         public int Count(string searchValue)
         {
-            //TODO : Sữa code đếm customers
-            return 20;
+            int count = 0;
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"select count(*) as count from Customers 
+                            where @searchValue = N'' or CompanyName like @searchValue";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                 Convert.ToInt32(cmd.ExecuteScalar());
+                connection.Close();
+            }
+            return count;
         }
         /// <summary>
         /// Xóa nhiều customers,hiển thị số lượng đã xóa.
@@ -64,17 +78,32 @@ namespace LiteCommerce.DataLayers.SqlServer
         /// <param name="pagesize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public List<Customer> List(int page, int pagesize, string searchValue)
+        public List<Customer> List(int page, int pageSize, string searchValue)
         {
             List<Customer> data = new List<Customer>();
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+               
                 connection.Open();
                 //Tạo lệnh thực thi truy vấn dữ liệu
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "Select * from Customers";
+                cmd.CommandText = @"SELECT * 
+                                    from
+                                    (
+	                                    select row_number() over(order by CompanyName) as RowNumber,
+			                                    Customers.*
+	                                    from Customers
+	                                    where (@searchValue =N'') or (CompanyName like @searchValue)
+                                    ) as t
+                                    where t.RowNumber between  (@page-1)*@pageSize + 1 and @page*@pageSize
+                                    order by t.RowNumber";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@page", page);
+                cmd.Parameters.AddWithValue("@pageSize", pageSize);
+                cmd.Parameters.AddWithValue("@searchValue", searchValue);
                 using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
                     while (dbReader.Read())

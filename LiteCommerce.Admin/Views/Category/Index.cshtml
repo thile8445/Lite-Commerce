@@ -1,23 +1,25 @@
-﻿@model IEnumerable<LiteCommerce.DomainModels.Category>
+﻿@model LiteCommerce.Admin.Models.CategoryPaginationResult
 @{
     ViewBag.Title = "Manage Category";
     int i = 0;
 }
 <div class="box box-primary">
     <div class="box-body">
-        <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Input search value...">
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-primary btn-flat">
-                    <i class="fa fa-search"></i>
-                </button>
-            </span>
-        </div>
+        <form action="~/Category" method="get">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Input search value..." name="searchValue" value="@Model.SearchValue">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
     </div>
 </div>
 <div class="container-fluid row lc-margin-bottom">
     <div class="col-sm-8">
-        There are <b>@ViewBag.rowCount</b> Category. Page 1/100
+        There are <b>@Model.RowCount</b> Category. Page @string.Format("{0}/{1}", Model.Page, Model.PageCount)
     </div>
     <div class="col-md-4 text-right">
         <div class="btn-group">
@@ -41,7 +43,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var category in Model)
+                @foreach (var category in Model.Data)
                 {
                     <tr>
                         <td>
@@ -71,11 +73,20 @@
     </div>
     <div class="box-footer clearfix text-center">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            <li><a href="~/Category?page=1&searchValue=@Model.SearchValue">«</a></li>
+            @for (int page = 1; page <= Model.PageCount; page++)
+            {
+                if (page == Model.Page)
+                {
+                    <li class="active"><a href="#">@page</a></li>
+                }
+                else
+                {
+                    <li><a href="~/Category?page=@page&searchValue=@Model.SearchValue">@page</a></li>
+                }
+
+            }
+            <li><a href="~/Category?page=@Model.PageCount&searchValue=@Model.SearchValue">»</a></li>
         </ul>
     </div>
 </div>

@@ -24,7 +24,22 @@ namespace LiteCommerce.DataLayers.SqlServer
 
         public int Count(string searchValue)
         {
-            return 20;
+            int count = 0;
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"select count(*) as count from Products 
+                    where @searchValue = N'' or ProductName like @searchValue";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                count = Convert.ToInt32(cmd.ExecuteScalar());
+                connection.Close();
+            }
+            return count;
         }
 
         public int Delete(int[] productIDs)
@@ -37,16 +52,30 @@ namespace LiteCommerce.DataLayers.SqlServer
             throw new NotImplementedException();
         }
 
-        public List<Product> List(int page, int pagesize, string searchValue)
+        public List<Product> List(int page, int pageSize, string searchValue)
         {
             List<Product> data = new List<Product>();
+            if (!string.IsNullOrEmpty(searchValue))
+                searchValue = "%" + searchValue + "%";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "SELECT * FROM Products";
+                cmd.CommandText = @"SELECT * 
+                        from
+                        (
+	                        select row_number() over(order by ProductName) as RowNumber,
+			                        Products.*
+	                        from Products
+	                        where (@searchValue =N'') or (ProductName like @searchValue)
+                        ) as t
+                        where t.RowNumber between  (@page-1)*@pageSize + 1 and @page*@pageSize
+                        order by t.RowNumber";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@page", page);
+                cmd.Parameters.AddWithValue("@pageSize", pageSize);
+                cmd.Parameters.AddWithValue("@searchValue", searchValue);
                 using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
                     while (reader.Read())

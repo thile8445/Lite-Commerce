@@ -19,8 +19,8 @@ namespace LiteCommerce.Admin
                 defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
            // routes.MapRoute(
-           //    name: "Dashboard",
-           //    url: "{controller}/{action}/{id}",
+           //    name: "Supplier",
+           //    url: "{controller}/{action}/?{page}&{searchValue}",
            //    defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
            //);
         }

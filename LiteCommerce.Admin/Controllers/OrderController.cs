@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,12 +14,12 @@ namespace LiteCommerce.Admin.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            return View();
+            int rowCount = 0;
+            List<Order> model = OrderBLL.ListOfOrders(1, 10, "", out rowCount);
+            ViewBag.rowCount = rowCount;
+            return View(model);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+       
         public ActionResult Create(string id = "")
         {
             if (string.IsNullOrEmpty(id))
