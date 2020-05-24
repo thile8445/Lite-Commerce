@@ -83,8 +83,27 @@
     </div>
     <div class="box-footer clearfix text-center">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="~Customer?page=1&searchValue=@Model.SearchValue">«</a></li>
-            @for (int page = 1; page <= Model.PageCount; page++)
+            <li><a href="~/Customer?page=1&searchValue=@Model.SearchValue">«</a></li>
+            @{ 
+                int index = 1;
+                if(Model.Page - 5 <= 0)
+                {
+                    index = 1;
+                }
+                else if(Model.Page + 4 >= Model.PageCount)
+                {
+                    index = Model.PageCount - 9 ;
+                }
+                else
+                {
+                    index = Model.Page - 4;
+                }
+            }
+            @if (Model.Page - 5 > 0)
+            {
+                <li><a href="#">...</a></li>
+            }
+            @for ( int page = index ; page <= index +(Model.PageCount < 10 ? Model.PageCount-1 : 9); page++)
             {
                 if (page == Model.Page)
                 {
@@ -96,7 +115,11 @@
                 }
 
             }
-            <li><a href="~Customer?page=@Model.PageCount&searchValue=@Model.SearchValue">»</a></li>
+            @if (Model.Page + 5 < Model.PageCount )
+            {
+                <li><a href="#">...</a></li>
+            }
+            <li><a href="~/Customer?page=@Model.PageCount&searchValue=@Model.SearchValue">»</a></li>
         </ul>
     </div>
 </div>

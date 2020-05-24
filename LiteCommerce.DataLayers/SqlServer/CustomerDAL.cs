@@ -48,7 +48,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@searchValue", searchValue);
-                 Convert.ToInt32(cmd.ExecuteScalar());
+                count = Convert.ToInt32(cmd.ExecuteScalar());
                 connection.Close();
             }
             return count;
