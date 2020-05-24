@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LiteCommerce.Admin.Models;
+using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,9 +14,20 @@ namespace LiteCommerce.Admin.Controllers
     {
         // GET: Supplier
         
-        public ActionResult Index()
+        public ActionResult Index(int page = 1,string searchValue = "")
         {
-            return View();
+            int pageSize = 3;
+            int rowCount = 0;
+            List<Supplier> ListOfSuppliers = CatalogBLL.ListOfSuppliers(page, pageSize, searchValue, out rowCount);
+            var model = new SupplierPaginationResult()
+            {
+                Page = page,
+                PageSize = pageSize,
+                RowCount = rowCount,
+                SearchValue = searchValue,
+                Data = ListOfSuppliers
+            };
+            return View(model);
         }
         /// <summary>
         /// in put

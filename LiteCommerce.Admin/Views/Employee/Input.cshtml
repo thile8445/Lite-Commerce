@@ -4,21 +4,21 @@
 <div class="box box-primary">
     <form role="form">
         <div class="box-header text-right">
-            <a href="~/Employee">Back to List</a>
+            <a href="~/Supplier">Back to List</a>
         </div>
         <div class="box-body">
             <div class="form-group">
-                <label>Company Name:</label>
-                <input type="text" class="form-control" placeholder="Enter Company Name">
+                <label>Title:</label>
+                <input type="text" class="form-control" placeholder="Ex: Sale Manager">
             </div>
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label>Contact Name:</label>
-                    <input type="text" class="form-control" placeholder="Contact Name">
+                    <label>Fist Name:</label>
+                    <input type="text" class="form-control" placeholder="Fist Name">
                 </div>
                 <div class="col-sm-6">
-                    <label>Contact Title:</label>
-                    <input type="text" class="form-control" placeholder="Ex: Sale Manager">
+                    <label>Last Name:</label>
+                    <input type="text" class="form-control" placeholder="Enter Last Name">
                 </div>
             </div>
             <div class="form-group">
@@ -43,7 +43,17 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label>Phone:</label>
+                    <label>Birth Date:</label>
+                    <input type="text" class="form-control" placeholder="Birth Date">
+                </div>
+                <div class="col-sm-6">
+                    <label>Hire Date:</label>
+                    <input type="text" class="form-control" placeholder="Hire Date">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label>HomePhone:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-phone"></i>
@@ -52,22 +62,33 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label>Fax:</label>
+                    <label>Email:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
-                            <i class="fa fa-fax"></i>
+                            <i class="fa fa-envelope-o"></i>
                         </div>
                         <input type="text" class="form-control">
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label>Home page:</label>
+                <label>PhotoPath:</label>
                 <div class="input-group">
                     <div class="input-group-addon">
                         <i class="fa fa-link"></i>
                     </div>
-                    <input type="text" class="form-control" placeholder="ex: http://company.com">
+                    <input type="file" class="form-control" ">
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label>Notes:</label>
+                    <input type="text" class="form-control" placeholder="notes">
+                </div>
+                <div class="col-sm-6">
+                    <label>Password:</label>
+                    <input type="text" class="form-control" placeholder="Password">
                 </div>
             </div>
         </div>
@@ -76,7 +97,7 @@
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fa fa-save"></i> Save
             </button>
-            <a class="btn btn-sm btn-default" href="~/Employee">
+            <a class="btn btn-sm btn-default" href="~/Supplier">
                 Cancel
             </a>
         </div>
