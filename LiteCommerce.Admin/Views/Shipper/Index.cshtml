@@ -17,6 +17,7 @@
         </form>
     </div>
 </div>
+<form action="~/Shipper/Delete" method="post">
 <div class="container-fluid row lc-margin-bottom">
     <div class="col-sm-8">
         There are <b>@Model.RowCount</b> Shippers. Page @string.Format("{0}/{1}", Model.Page, Model.PageCount)
@@ -24,7 +25,7 @@
     <div class="col-md-4 text-right">
         <div class="btn-group">
             <a href="~/Shipper/Input" class="btn btn-sm btn-primary">Add Shipper</a>
-            <button type="button" class="btn btn-sm btn-danger">Delete Shippers</button>
+            <button type="submit" class="btn btn-sm btn-danger">Delete Shippers</button>
         </div>
     </div>
 </div>
@@ -47,7 +48,7 @@
                 {
                     <tr>
                         <td>
-                            <input type="checkbox" />
+                            <input type="checkbox" name="ShipperIDs" value="@shipper.ShipperID"/>
                         </td>
                         <td>@(++i)</td>
                         <td>
@@ -62,7 +63,7 @@
                             
                         </td>
                         <td class="text-right">
-                            <a class="btn btn-sm btn-default" href="~/Shipper/Input/@i/">
+                            <a class="btn btn-sm btn-default" href="~/Shipper/Input/@shipper.ShipperID/">
                                 <i class="fa fa-edit"></i>
                             </a>
                         </td>
@@ -70,23 +71,46 @@
                 }
             </tbody>
         </table>
+        </div>
     </div>
+</form>
     <div class="box-footer clearfix text-center">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="~/Shipper?page=1&searchValue=@Model.SearchValue">«</a></li>
-            @for (int page = 1; page <= Model.PageCount; page++)
+            @if (Model.Page > 1)
             {
-                if (page == Model.Page)
-                {
-                    <li class="active"><a href="#">@page</a></li>
-                }
-                else
-                {
-                    <li><a href="~/Shipper?page=@page&searchValue=@Model.SearchValue">@page</a></li>
-                }
-
+                <li><a href="~/Shipper?page=@(Model.Page - 1)@Model.SearchValue">&laquo;</a></li>
             }
-            <li><a href="~/Shipper?page=@Model.PageCount&searchValue=@Model.SearchValue">»</a></li>
+            @if (Model.Page > 3)
+            {
+                <li><a href="~/Shipper?page=1@(Model.SearchValue)">1</a></li>
+                <li class="dots"><a href="#">...</a></li>
+            }
+            @if (Model.Page - 2 > 0)
+            {
+                <li><a href="~/Shipper?page=@(Model.Page-2)@Model.SearchValue">@(Model.Page - 2)</a></li>
+            }
+            @if (Model.Page - 1 > 0)
+            {
+                <li><a href="~/Shipper?page=@(Model.Page-1)@Model.SearchValue">@(Model.Page - 1)</a></li>
+            }
+            <li class="active"><a href="~/Shipper?page=@Model.Page@Model.SearchValue">@Model.Page</a></li>
+            @if (Model.Page + 1 < Model.PageCount + 1)
+            {
+                <li><a href="~/Shipper?page=@(Model.Page+1)@Model.SearchValue">@(Model.Page + 1)</a></li>
+            }
+            @if (Model.Page + 2 < Model.PageCount + 1)
+            {
+                <li><a href="~/Shipper?page=@(Model.Page+2)@Model.SearchValue">@(Model.Page + 2)</a></li>
+            }
+            @if (Model.Page < Model.PageCount - 2)
+            {
+                <li class="dots"><a href="#">...</a></li>
+                <li><a href="~/Shipper?page=@Model.PageCount@Model.SearchValue">@Model.PageCount</a></li>
+            }
+            @if (Model.Page < Model.PageCount)
+            {
+                <li><a href="~/Shipper?page=@(Model.Page + 1)@Model.SearchValue">&raquo;</a></li>
+            }
         </ul>
     </div>
 </div>

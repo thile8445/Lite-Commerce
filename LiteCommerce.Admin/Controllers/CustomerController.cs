@@ -28,17 +28,77 @@ namespace LiteCommerce.Admin.Controllers
             };
             return View(model);
         }
+        [HttpGet]
         public ActionResult Input(string id ="")
         {
             if (string.IsNullOrEmpty(id))
             {
                 ViewBag.Title = "Create a Customer";
+                Customer newCustomer = new Customer()
+                {
+                    CustomerID = ""
+                };
+                return View(newCustomer);
             }
             else
             {
                 ViewBag.Title = "Edit a Customer";
+                Customer editCustomer = CatalogBLL.GetCustomer(id);
+                if (editCustomer == null)
+                    return RedirectToAction("Index");
+                return View(editCustomer);
             }
-            return View();
+        }
+        [HttpPost]
+        public ActionResult Input(Customer model)
+        {
+            try
+            {
+                //TODO :Kiểm tra tính hợp lệ của dữ liệu nhập vào
+                if (string.IsNullOrEmpty(model.CompanyName))
+                    ModelState.AddModelError("CompanyName", "CompanyName expected");
+                if (string.IsNullOrEmpty(model.ContactName))
+                    ModelState.AddModelError("ContactName", "ContactName expected");
+                if (string.IsNullOrEmpty(model.ContactTitle))
+                    ModelState.AddModelError("ContactTitle", "ContactTitle expected");
+                if (string.IsNullOrEmpty(model.Address))
+                    model.Address = "";
+                if (string.IsNullOrEmpty(model.Country))
+                    model.Country = "";
+                if (string.IsNullOrEmpty(model.City))
+                    model.City = "";
+                if (string.IsNullOrEmpty(model.Phone))
+                    model.Phone = "";
+                if (string.IsNullOrEmpty(model.Fax))
+                    model.Fax = "";
+                
+                //TODO :Lưu dữ liệu nhập vào
+                if (model.CustomerID == "" )
+                {
+                    CatalogBLL.AddCustomerr(model);
+                }
+                else
+                {
+                    CatalogBLL.UpdateCustomer(model);
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message + ":" + ex.StackTrace);
+                return View(model);
+            }
+        }
+        [HttpPost]
+        public ActionResult Delete(string[] customerIDs)
+        {
+            if (customerIDs != null)
+            {
+                CatalogBLL.DeleteCustomers(customerIDs);
+
+            }
+            return RedirectToAction("Index");
+
         }
     }
 }

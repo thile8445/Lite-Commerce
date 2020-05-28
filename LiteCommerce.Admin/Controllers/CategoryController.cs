@@ -28,17 +28,71 @@ namespace LiteCommerce.Admin.Controllers
             };
             return View(model);
         }
+        [HttpGet]
         public ActionResult Input(string id = "")
         {
             if (string.IsNullOrEmpty(id))
             {
                 ViewBag.Title = "Create new Category";
+                Category newCategory = new Category()
+                {
+                    CategoryID = 0
+                };
+                return View(newCategory);
             }
             else
             {
                 ViewBag.Title = "Edit a Category";
+                Category editCategory = CatalogBLL.GetCategory(Convert.ToInt32(id));
+                if (editCategory == null)
+                    return RedirectToAction("Index");
+                return View(editCategory);
             }
-            return View();
+           
+        }
+        [HttpPost]
+        public ActionResult Input(Category model)
+        {
+            try
+            {
+                //TODO :Kiểm tra tính hợp lệ của dữ liệu nhập vào
+                if (string.IsNullOrEmpty(model.CategoryName))
+                    ModelState.AddModelError("CategoryName", "CategoryName expected");
+                if (string.IsNullOrEmpty(model.Description))
+                    model.Description = "";
+                //TODO :Lưu dữ liệu nhập vào
+                if (model.CategoryID == 0)
+                {
+                
+                    CatalogBLL.AddCategory(model);
+                }
+                else
+                {
+                    CatalogBLL.UpdateCategory(model);
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message + ":" + ex.StackTrace);
+                return View(model);
+            }
+        }
+        /// <summary>
+        /// Xóa danh sách category
+        /// </summary>
+        /// <param name="CategoriesID"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(int[] CategoriesID)
+        {
+            if (CategoriesID != null)
+            {
+                CatalogBLL.DeleteCategories(CategoriesID);
+
+            }
+            return RedirectToAction("Index");
+
         }
     }
 }

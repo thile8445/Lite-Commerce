@@ -1,54 +1,63 @@
-﻿@{
+﻿@model LiteCommerce.DomainModels.Employee
+@{
 
 }
 <div class="box box-primary">
-    <form role="form">
+    <form role="form" action="~/Employee/Input" method="post">
         <div class="box-header text-right">
-            <a href="~/Supplier">Back to List</a>
+            <a href="~/Employee">Back to List</a>
         </div>
         <div class="box-body">
             <div class="form-group">
-                <label>Title:</label>
-                <input type="text" class="form-control" placeholder="Ex: Sale Manager">
+                <input type="hidden" value="@Model.EmployeeID" name="EmployeeID"/>
+                <label>Title: @Html.ValidationMessage("Title", new { @style = "color: red" })</label>
+                <input type="text" class="form-control" placeholder="Ex: Sale Manager" value="@Model.Title" name="Title">
             </div>
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label>Fist Name:</label>
-                    <input type="text" class="form-control" placeholder="Fist Name">
+                    <label>Fist Name:@Html.ValidationMessage("FirstName", new { @style = "color: red" })</label>
+                    <input type="text" class="form-control" placeholder="Fist Name" value="@Model.FirstName" name="FirstName">
                 </div>
                 <div class="col-sm-6">
-                    <label>Last Name:</label>
-                    <input type="text" class="form-control" placeholder="Enter Last Name">
+                    <label>Last Name:@Html.ValidationMessage("LastName", new { @style = "color: red" })</label>
+                    <input type="text" class="form-control" placeholder="Enter Last Name" value="@Model.LastName" name="LastName">
                 </div>
             </div>
             <div class="form-group">
                 <label>Address:</label>
-                <input type="text" class="form-control" placeholder="Address">
+                <input type="text" class="form-control" placeholder="Address" value="@Model.Address" name="Address">
             </div>
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label>Country:</label>
-                    <select class="form-control">
+                    <select class="form-control" name="Country">
                         <option value="">-- Choose Country --</option>
-                        <option value="USA">USA</option>
-                        <option value="UK">United Kingdom</option>
-                        <option value="CHINA">China</option>
-                        <option value="VN">Vietnam</option>
+                        @foreach (var country in SelectListHelper.Countries())
+                        {
+                            if (Model.Country == country.Value)
+                            {
+                                <option value="@country.Value" selected>@country.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@country.Value">@country.Text</option>
+                            }
+                        }
                     </select>
                 </div>
                 <div class="col-sm-6">
                     <label>City:</label>
-                    <input type="text" class="form-control" placeholder="Ex: New Orleans">
+                    <input type="text" class="form-control" placeholder="Ex: New Orleans" value="@Model.City" name="City">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label>Birth Date:</label>
-                    <input type="text" class="form-control" placeholder="Birth Date">
+                    <label>Birth Date:@Html.ValidationMessage("BirthDate", new { @style = "color: red" })</label>
+                    <input type="datetime" class="form-control"  value="@Model.BirthDate" name="BirthDate">
                 </div>
                 <div class="col-sm-6">
-                    <label>Hire Date:</label>
-                    <input type="text" class="form-control" placeholder="Hire Date">
+                    <label>Hire Date:@Html.ValidationMessage("HireDate", new { @style = "color: red" })</label>
+                    <input type="datetime" class="form-control"  value="@Model.HireDate" name="HireDate">
                 </div>
             </div>
             <div class="form-group row">
@@ -58,7 +67,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-phone"></i>
                         </div>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="HomePhone" value="@Model.HomePhone">
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -67,7 +76,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-envelope-o"></i>
                         </div>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" value="@Model.Email" name="Email">
                     </div>
                 </div>
             </div>
@@ -77,18 +86,18 @@
                     <div class="input-group-addon">
                         <i class="fa fa-link"></i>
                     </div>
-                    <input type="file" class="form-control" ">
+                    <input type="file" class="form-control" value="@Model.PhotoPath" name="PhotoPath">
                 </div>
 
             </div>
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label>Notes:</label>
-                    <input type="text" class="form-control" placeholder="notes">
+                    <input type="text" class="form-control" placeholder="notes" value="@Model.Notes" name="Notes">
                 </div>
                 <div class="col-sm-6">
-                    <label>Password:</label>
-                    <input type="text" class="form-control" placeholder="Password">
+                    <label>Password:@Html.ValidationMessage("Password", new { @style = "color: red" })</label>
+                    <input type="text" class="form-control" placeholder="Password" value="@Model.Password" name="Password">
                 </div>
             </div>
         </div>
@@ -97,7 +106,7 @@
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fa fa-save"></i> Save
             </button>
-            <a class="btn btn-sm btn-default" href="~/Supplier">
+            <a class="btn btn-sm btn-default" href="~/Employee">
                 Cancel
             </a>
         </div>

@@ -98,7 +98,152 @@ namespace LiteCommerce.BusinessLayers
             rowCount = ProductDB.Count(searchValue);
             return ProductDB.List(page, pageSize, searchValue);
         }
+        /// <summary>
+        /// Lấy 1 supplier 
+        /// </summary>
+        /// <param name="supplierID"></param>
+        /// <returns></returns>
+        public static Supplier GetSupplier(int supplierID)
+        {
+            return SupplierDB.Get(supplierID);
+        }
+        /// <summary>
+        /// thêm 1 supplier
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int AddSupplier(Supplier data)
+        {
+            return SupplierDB.Add(data);
+        }
+        /// <summary>
+        /// xóa 1 danh sách suppliers
+        /// </summary>
+        /// <param name="supplierIDs"></param>
+        /// <returns></returns>
+        public static int DeleteSuppliers(int[] supplierIDs)
+        {
+            return SupplierDB.Delete(supplierIDs);
+        }
+        /// <summary>
+        /// update 1 supplier
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool UpdateSupplier(Supplier data)
+        {
+            return SupplierDB.Update(data);
+        }
+        /// <summary>
+        /// Lấy 1 Category 
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <returns></returns>
+        public static Category GetCategory(int categoryID)
+        {
+            return CategoryDB.Get(categoryID);
+        }
+        /// <summary>
+        /// thêm 1 Category
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int AddCategory(Category data)
+        {
+            return CategoryDB.Add(data);
+        }
+        /// <summary>
+        /// xóa 1 danh sách Category
+        /// </summary>
+        /// <param name="CatrgoriesID"></param>
+        /// <returns></returns>
+        public static int DeleteCategories(int[] CatrgoriesID)
+        {
+            return CategoryDB.Delete(CatrgoriesID);
+        }
+        /// <summary>
+        /// update 1 category
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool UpdateCategory(Category data)
+        {
+            return CategoryDB.Update(data);
+        }
 
+        /// <summary>
+        /// Lấy 1 Shipper 
+        /// </summary>
+        /// <param name="shipperID"></param>
+        /// <returns></returns>
+        public static Shipper GetShipper(int shipperID)
+        {
+            return ShipperDB.Get(shipperID);
+        }
+        /// <summary>
+        /// thêm 1 Shipper
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int AddShipper(Shipper data)
+        {
+            return ShipperDB.Add(data);
+        }
+        /// <summary>
+        /// xóa 1 danh sách Shipper
+        /// </summary>
+        /// <param name="ShipperIDs"></param>
+        /// <returns></returns>
+        public static int DeleteShippers(int[] ShipperIDs)
+        {
+            return ShipperDB.Delete(ShipperIDs);
+        }
+        /// <summary>
+        /// update 1 Shipper
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool UpdateShipper(Shipper data)
+        {
+            return ShipperDB.Update(data);
+        }
+
+        /// <summary>
+        /// Lấy 1 Customer 
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
+        public static Customer GetCustomer(string customerID)
+        {
+            return CustomerDB.Get(customerID);
+        }
+        /// <summary>
+        /// thêm 1 Customer
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int AddCustomerr(Customer data)
+        {
+            return CustomerDB.Add(data);
+        }
+        /// <summary>
+        /// xóa 1 danh sách Customer
+        /// </summary>
+        /// <param name="CustomerIDs"></param>
+        /// <returns></returns>
+        public static int DeleteCustomers(string[] CustomerIDs)
+        {
+            return CustomerDB.Delete(CustomerIDs);
+        }
+        /// <summary>
+        /// update 1 customer
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool UpdateCustomer(Customer data)
+        {
+            return CustomerDB.Update(data);
+        }
         #endregion
     }
 
