@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LiteCommerce.Admin.Models;
+using LiteCommerce.BusinessLayers;
+using LiteCommerce.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,21 +13,106 @@ namespace LiteCommerce.Admin.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string searchValue = "")
         {
-            return View();
+            int pageSize = 3;
+            int rowCount = 0;
+            List<Employee> ListOfEmployee = EmloyeeBLL.ListOfEmployees(page, pageSize, searchValue, out rowCount);
+            var model = new EmployeePaginationResult()
+            { 
+                Page = page,
+                PageSize = pageSize,
+                RowCount = rowCount,
+                SearchValue = searchValue,
+                Data = ListOfEmployee
+            };
+            return View(model);
         }
+        [HttpGet]
         public ActionResult Input(string id = "")
         {
             if (string.IsNullOrEmpty(id))
             {
                 ViewBag.Title = "Create new Employee";
+                Employee newEmployee = new Employee()
+                {
+                    EmployeeID = 0
+                };
+                return View(newEmployee);
             }
             else
             {
                 ViewBag.Title = "Edit a Employee";
+                Employee editEmployee = EmloyeeBLL.GetEmployee(Convert.ToInt32(id));
+                if (editEmployee == null)
+                    return RedirectToAction("Index");
+                return View(editEmployee);
             }
-            return View();
+        }
+        [HttpPost]
+        public ActionResult Input(Employee model)
+        {
+            try
+            {
+                //TODO :Kiểm tra tính hợp lệ của dữ liệu nhập vào
+                if (string.IsNullOrEmpty(model.FirstName))
+                    ModelState.AddModelError("FirstName", "FirstName expected");
+                if (string.IsNullOrEmpty(model.LastName))
+                    ModelState.AddModelError("LastName", "LastName expected");
+                if (string.IsNullOrEmpty(model.Title))
+                    ModelState.AddModelError("Title", "Title expected");
+                if (string.IsNullOrEmpty(model.Password))
+                    ModelState.AddModelError("Password", "Password expected");
+                if(model.BirthDate == DateTime.MinValue)
+                    ModelState.AddModelError("BirthDate", "BirthDate expected");
+                if (model.HireDate == DateTime.MinValue)
+                    ModelState.AddModelError("HireDate", "HireDate expected");
+                if (string.IsNullOrEmpty(model.Email))
+                    model.Email = "";
+                if (string.IsNullOrEmpty(model.Address))
+                    model.Address = "";
+                if (string.IsNullOrEmpty(model.Country))
+                    model.Country = "";
+                if (string.IsNullOrEmpty(model.City))
+                    model.City = "";
+                if (string.IsNullOrEmpty(model.HomePhone))
+                    model.HomePhone = "";
+                if (string.IsNullOrEmpty(model.Notes))
+                    model.Notes = "";
+                if (string.IsNullOrEmpty(model.PhotoPath))
+                    model.PhotoPath = "";
+                //TODO :Lưu dữ liệu nhập vào
+                if (model.EmployeeID == 0)
+                {
+                    EmloyeeBLL.AddEmployee(model);
+                }
+                else
+                {
+                    EmloyeeBLL.UpdateEmployee(model);
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message + ":" + ex.StackTrace);
+                return View(model);
+            }
+        }
+        /// <summary>
+        /// Xóa danh sách employee
+        /// </summary>
+        /// <param name="employeeIDs"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(int[] employeeIDs)
+        {
+            if (employeeIDs != null)
+            {
+                EmloyeeBLL.DeleteEmployees(employeeIDs);
+
+            }
+            return RedirectToAction("Index");
+
         }
     }
 }

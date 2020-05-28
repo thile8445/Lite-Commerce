@@ -1,89 +1,129 @@
-﻿@{
-    ViewBag.Title = "Customers";
+﻿@model  LiteCommerce.Admin.Models.CustomerPaginationResult
+@{
+    ViewBag.Title = "Manager Customers";
+    int i = 0;
 }
 <div class="box box-primary">
     <div class="box-body">
-        <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Input search value...">
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-primary btn-flat">
-                    <i class="fa fa-search"></i>
-                </button>
-            </span>
-        </div>
+        <form action="~/Customer" method="get">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Input search value..." name="searchValue" value="@Model.SearchValue">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
     </div>
 </div>
-<div class="container-fluid row lc-margin-bottom">
-    <div class="col-sm-8">
-        There are <b>1,000</b> Customers. Page 1/100
-    </div>
-    <div class="col-md-4 text-right">
-        <div class="btn-group">
-            <a href="~/Customer/Input" class="btn btn-sm btn-primary">Add Customer</a>
-            <button type="button" class="btn btn-sm btn-danger">Delete Customer</button>
+<form action="~/Customer/Delete" method="post">
+    <div class="container-fluid row lc-margin-bottom">
+        <div class="col-sm-8">
+            There are <b>@Model.RowCount</b> Customers. Page @string.Format("{0}/{1}", Model.Page, Model.PageCount)
+        </div>
+        <div class="col-md-4 text-right">
+            <div class="btn-group">
+                <a href="~/Customer/Input" class="btn btn-sm btn-primary">Add Customer</a>
+                <button type="submit" class="btn btn-sm btn-danger">Delete Customer</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="box box-success">
-    <div class="box-body">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th style="width:30px">
-                        <input type="checkbox" />
-                    </th>
-                    <th style="width:50px">#</th>
-                    <th style="width:auto">Name</th>
-                    <th style="width:200px">Address</th>
-                    <th style="width:200px">Contact Info</th>
-                    <th style="width:80px"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 1; i <= 3; i++)
-                {
+    <div class="box box-success">
+        <div class="box-body">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td>
+                        <th style="width:30px">
                             <input type="checkbox" />
-                        </td>
-                        <td>@i</td>
-                        <td>
-                            <span class="lc-company-name">
-                                New Orleans Cajun Delights
-                            </span>
-                            <span class="lc-contact-title">
-                                Order Administrator:
-                            </span>
-                            <span class="lc-contact-name">
-                                Shelley Burke
-                            </span>
-                        </td>
-                        <td>
-                            <span style="display:block">P.O. Box 78934</span>
-                            <span>New Orleans - USA</span>
-                        </td>
-                        <td>
-                            <p style="display:block"><i class="fa fa-phone"></i> (100) 555-4822</p>
-                            <p style="display:block"><i class="fa fa-fax"></i> (100) 333-665411</p>
-                            <p style="display:block"><i class="fa fa-home"></i> https://neworleans.com</p>
-                        </td>
-                        <td class="text-right">
-                            <a class="btn btn-sm btn-default" href="~/Customer/Input/@i/">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                        </td>
+                        </th>
+                        <th style="width:50px">#</th>
+                        <th style="width:auto">Name</th>
+                        <th style="width:200px">Address</th>
+                        <th style="width:200px">Contact Info</th>
+                        <th style="width:80px"></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="box-footer clearfix text-center">
-        <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model.Data)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" value="@customer.CustomerID" name="customerIDs"/>
+                            </td>
+                            <td>@(++i)</td>
+                            <td>
+                                <span class="lc-company-name">
+                                    @customer.CompanyName
+                                </span>
+                                <span class="lc-contact-title">
+                                    @customer.ContactTitle
+                                </span>
+                                <span class="lc-contact-name">
+                                    @customer.ContactName
+                                </span>
+                            </td>
+                            <td>
+                                <span style="display:block">@customer.Address</span>
+                                <span>@customer.Country</span>
+                            </td>
+                            <td>
+                                <p style="display:block"><i class="fa fa-phone"></i> @customer.Phone</p>
+                                <p style="display:block"><i class="fa fa-fax"></i> @customer.Fax</p>
+
+                            </td>
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-default" href="~/Customer/Input/@customer.CustomerID/">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        </div>
+</form>
+<div class="box-footer clearfix text-center">
+    <ul class="pagination pagination-sm no-margin pull-right">
+        <li><a href="~/Customer?page=1&searchValue=@Model.SearchValue">«</a></li>
+        @{
+            int index = 1;
+            if (Model.Page - 5 <= 0)
+            {
+                index = 1;
+            }
+            else if (Model.Page + 4 >= Model.PageCount)
+            {
+                //index = Model.PageCount - 9 ;
+                index = Model.Page;
+            }
+            else
+            {
+                index = Model.Page - 4;
+            }
+        }
+        @if (Model.Page - 5 > 0)
+            {
+            <li><a href="#">...</a></li>
+        }
+        @for (int page = index; page <= index + (Model.PageCount < 10 ? Model.PageCount - 1 : 9); page++)
+        {
+            if (page == Model.Page)
+            {
+                <li class="active"><a href="#">@page</a></li>
+            }
+            else
+            {
+                <li><a href="~/Customer?page=@page&searchValue=@Model.SearchValue">@page</a></li>
+            }
+
+        }
+        @if (Model.Page + 5 < Model.PageCount)
+        {
+            <li><a href="#">...</a></li>
+        }
+        <li><a href="~/Customer?page=@Model.PageCount&searchValue=@Model.SearchValue">»</a></li>
+    </ul>
+</div>
 </div>
