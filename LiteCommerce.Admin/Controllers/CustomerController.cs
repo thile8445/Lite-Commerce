@@ -38,6 +38,7 @@ namespace LiteCommerce.Admin.Controllers
                 {
                     CustomerID = ""
                 };
+                ViewBag.kt = 0;
                 return View(newCustomer);
             }
             else
@@ -46,15 +47,18 @@ namespace LiteCommerce.Admin.Controllers
                 Customer editCustomer = CatalogBLL.GetCustomer(id);
                 if (editCustomer == null)
                     return RedirectToAction("Index");
+                ViewBag.kt = 1;
                 return View(editCustomer);
             }
         }
         [HttpPost]
-        public ActionResult Input(Customer model)
+        public ActionResult Input(Customer model,int kt)
         {
             try
             {
                 //TODO :Kiểm tra tính hợp lệ của dữ liệu nhập vào
+                if (string.IsNullOrEmpty(model.CustomerID))
+                    ModelState.AddModelError("CustomerID", "CustomerID expected");
                 if (string.IsNullOrEmpty(model.CompanyName))
                     ModelState.AddModelError("CompanyName", "CompanyName expected");
                 if (string.IsNullOrEmpty(model.ContactName))
@@ -73,13 +77,17 @@ namespace LiteCommerce.Admin.Controllers
                     model.Fax = "";
                 
                 //TODO :Lưu dữ liệu nhập vào
-                if (model.CustomerID == "" )
+                if (Convert.ToInt32(kt) == 0) 
                 {
+                    ViewBag.kt = 0;
                     CatalogBLL.AddCustomerr(model);
+                           
                 }
-                else
+                else if(Convert.ToInt32(kt) == 1)
                 {
+                    ViewBag.kt = 1;
                     CatalogBLL.UpdateCustomer(model);
+                    
                 }
                 return RedirectToAction("Index");
             }

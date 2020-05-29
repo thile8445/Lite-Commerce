@@ -111,7 +111,8 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"DELETE FROM Employees
-                                            WHERE(EmployeeID = @EmployeeID)";
+                                            WHERE(EmployeeID = @EmployeeID)
+                                    AND(EmployeeID NOT IN(SELECT EmployeeID FROM Orders))";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.Add("@EmployeeID", SqlDbType.Int);

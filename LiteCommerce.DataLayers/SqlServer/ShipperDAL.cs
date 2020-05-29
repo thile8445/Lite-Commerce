@@ -84,7 +84,8 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"DELETE FROM Shippers
-                                            WHERE(ShipperID = @shipperId)"
+                                            WHERE(ShipperID = @shipperId)
+                                        AND(ShipperID NOT IN(SELECT ShipperID FROM Orders))"
                                              ;
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;

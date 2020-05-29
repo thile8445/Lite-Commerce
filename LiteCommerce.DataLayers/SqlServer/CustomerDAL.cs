@@ -44,7 +44,6 @@ namespace LiteCommerce.DataLayers.SqlServer
 	                                          Country,
 	                                          Phone,
 	                                          Fax
-	                                         
                                           )
                                           VALUES
                                           (
@@ -57,9 +56,8 @@ namespace LiteCommerce.DataLayers.SqlServer
 	                                          @Country,
 	                                          @Phone,
 	                                          @Fax
-	                                         
                                           );
-                                          SELECT @@IDENTITY;";
+                                          select @@ROWCOUNT ;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@CustomerID", data.CustomerID);
@@ -71,7 +69,10 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@Country", data.Country);
                 cmd.Parameters.AddWithValue("@Phone", data.Phone);
                 cmd.Parameters.AddWithValue("@Fax", data.Fax);
+
+
                 customerId = Convert.ToInt32(cmd.ExecuteScalar());
+                //customerId = 1;
 
                 connection.Close();
             }
@@ -116,7 +117,8 @@ namespace LiteCommerce.DataLayers.SqlServer
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"DELETE FROM Customers
-                                            WHERE(CustomerID = @CustomerID)";
+                                            WHERE(CustomerID = @CustomerID)
+                                        AND(CustomerID NOT IN(SELECT CustomerID FROM Orders))";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.Add("@CustomerID", SqlDbType.NVarChar);
