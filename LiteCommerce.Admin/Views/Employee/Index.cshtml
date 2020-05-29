@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 <p>Birth Date : @employee.BirthDate</p>
-                                <p>Hire Date :@employee.HireDate</p>
+                                <p>Hire Date :@String.Format("{0:dd/MM/yyyy:t}", employee.HireDate)</p>
                             </td>
                             <td>
                                 <p style="display:block">@employee.Address</p>
