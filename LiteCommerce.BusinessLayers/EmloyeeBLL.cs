@@ -80,6 +80,10 @@ namespace LiteCommerce.BusinessLayers
         {
             return EmployeeDB.Update(data);
         }
+        public static bool ChangePassword(int id,string password,string nPassword,string aPassword)
+        {
+            return EmployeeDB.ChangePassword(id, password, nPassword, aPassword);
+        }
         #endregion
     }
 }

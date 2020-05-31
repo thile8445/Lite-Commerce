@@ -48,5 +48,7 @@ namespace LiteCommerce.DataLayers
         /// <param name="employeeIDs"></param>
         /// <returns></returns>
         int Delete(int[] employeeIDs);
+        bool ChangePassword(int id, string password, string nPassword,string aPassword);
+       
     }
 }

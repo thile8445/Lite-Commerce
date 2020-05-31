@@ -167,6 +167,8 @@
     <Compile Include="Models\CustomerPaginationResult.cs" />
     <Compile Include="Models\EmployeePaginationResult.cs" />
     <Compile Include="Models\PaginationResult.cs" />
+    <Compile Include="Models\Password\EmployeePassword.cs" />
+    <Compile Include="Models\Password\Password.cs" />
     <Compile Include="Models\ProductPaginationResult.cs" />
     <Compile Include="Models\ShipperPaginationResult.cs" />
     <Compile Include="Models\SupplierPaginationResult.cs" />
@@ -7441,6 +7443,7 @@
     <Content Include="Themes\TMart\fonts\themify.eot" />
     <Content Include="Themes\TMart\fonts\themify.ttf" />
     <Content Include="Themes\TMart\fonts\themify.woff" />
+    <Content Include="Views\Employee\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

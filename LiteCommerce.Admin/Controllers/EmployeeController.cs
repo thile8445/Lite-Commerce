@@ -1,4 +1,5 @@
 ﻿using LiteCommerce.Admin.Models;
+using LiteCommerce.Admin.Models.Password;
 using LiteCommerce.BusinessLayers;
 using LiteCommerce.DomainModels;
 using System;
@@ -113,6 +114,38 @@ namespace LiteCommerce.Admin.Controllers
             }
             return RedirectToAction("Index");
 
+        }
+
+        [HttpGet]
+        public ActionResult ChangePassword(string Id ="")
+        {
+            EmployeePassword employeePassword = new EmployeePassword()
+            {
+                Id = Convert.ToInt32(Id)
+            };
+            ViewBag.Title = "ChangePassword";
+            return View(employeePassword);
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(EmployeePassword model)
+        {
+
+            try
+            {
+                if (string.IsNullOrEmpty(model.password))
+                    ModelState.AddModelError("password", "Old password expected");
+                if (string.IsNullOrEmpty(model.nPassword))
+                    ModelState.AddModelError("nPassword", "New password expected");
+                if (string.IsNullOrEmpty(model.aPassword))
+                    ModelState.AddModelError("aPassword", "Password expected");
+                EmloyeeBLL.ChangePassword(model.Id, model.password, model.nPassword, model.aPassword);
+                return RedirectToAction("Input/" + model.Id);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message + ":" + ex.StackTrace);
+                return View(model);
+            }
         }
     }
 }

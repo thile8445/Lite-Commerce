@@ -82,6 +82,29 @@ namespace LiteCommerce.DataLayers.SqlServer
             return employeeId;
         }
 
+        public bool ChangePassword(int id, string password, string nPassword,string aPassword)
+        {
+            int row = 0;
+            using(SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"update Employees 
+	                        set Password = @newPassword
+	                        where EmployeeID = @id and Password = @password and @newPassword = @APassword";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@newPassword", nPassword);
+                cmd.Parameters.AddWithValue("@APassword", aPassword);
+
+                row = Convert.ToInt32(cmd.ExecuteNonQuery());
+                connection.Close();
+            }
+            return row > 0;
+        }
+
         public int Count(string searchValue)
         {
             int count = 0;
