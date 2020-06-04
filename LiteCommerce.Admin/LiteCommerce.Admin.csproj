@@ -181,6 +181,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\uploads\lich.png" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -6643,6 +6644,7 @@
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Themes\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Themes\Css\main-style.css" />
+    <Content Include="Themes\Js\SelectAllCheckbox.js" />
     <Content Include="Themes\TMart\css\bootstrap.min.css" />
     <Content Include="Themes\TMart\css\core.css" />
     <Content Include="Themes\TMart\css\custom.css" />
@@ -7447,7 +7449,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

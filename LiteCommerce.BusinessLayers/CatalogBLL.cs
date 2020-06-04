@@ -21,9 +21,9 @@ namespace LiteCommerce.BusinessLayers
         {
             SupplierDB = new DataLayers.SqlServer.SupplierDAL(connectionString);
             CustomerDB = new DataLayers.SqlServer.CustomerDAL(connectionString);
-            ShipperDB = new DataLayers.SqlServer.ShipperDAL(connectionString);
-            CategoryDB =new DataLayers.SqlServer.CategoryDAL(connectionString);
-            ProductDB = new DataLayers.SqlServer.ProductDAL(connectionString);
+            ShipperDB  = new DataLayers.SqlServer.ShipperDAL(connectionString);
+            CategoryDB = new DataLayers.SqlServer.CategoryDAL(connectionString);
+            ProductDB  = new DataLayers.SqlServer.ProductDAL(connectionString);
         }
         #region Khai báo các thuộc tính giao tiếp với DAL
    

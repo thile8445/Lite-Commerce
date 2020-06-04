@@ -4,6 +4,7 @@ using LiteCommerce.BusinessLayers;
 using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -51,7 +52,7 @@ namespace LiteCommerce.Admin.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Input(Employee model)
+        public ActionResult Input(Employee model, HttpPostedFileBase PhotoPath)
         {
             try
             {
@@ -68,6 +69,8 @@ namespace LiteCommerce.Admin.Controllers
                     ModelState.AddModelError("BirthDate", "BirthDate expected");
                 if (model.HireDate == DateTime.MinValue)
                     ModelState.AddModelError("HireDate", "HireDate expected");
+                if (model.HireDate.CompareTo(model.BirthDate) < 0)
+                    ModelState.AddModelError("Date", " expected");
                 if (string.IsNullOrEmpty(model.Email))
                     model.Email = "";
                 if (string.IsNullOrEmpty(model.Address))
@@ -82,6 +85,18 @@ namespace LiteCommerce.Admin.Controllers
                     model.Notes = "";
                 if (string.IsNullOrEmpty(model.PhotoPath))
                     model.PhotoPath = "";
+                //TODO :upload image
+                if (PhotoPath != null)
+                {
+                    string FileName = $"{DateTime.Now.Ticks}{Path.GetExtension(PhotoPath.FileName)}";
+                    string path = Path.Combine(Server.MapPath("~/Images/uploads"), FileName);
+                    PhotoPath.SaveAs(path);
+                    model.PhotoPath = FileName;
+                    //string folder = Server.MapPath("~/images/uploads");
+                    //string fileName = string.Format("{0}{1}", DateTime.Now.Ticks, Path.GetExtension(PhotoPath.FileName));
+                    //string filePath = Path.Combine(folder, fileName);
+                    //model.PhotoPath = fileName;
+                }
                 //TODO :Lưu dữ liệu nhập vào
                 if (model.EmployeeID == 0)
                 {
