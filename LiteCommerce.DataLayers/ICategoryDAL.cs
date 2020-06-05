@@ -48,5 +48,10 @@ namespace LiteCommerce.DataLayers
         /// <param name="categoryIDs"></param>
         /// <returns></returns>
         int Delete(int[] categoryIDs);
+        /// <summary>
+        /// Lay tat ca categories
+        /// </summary>
+        /// <returns></returns>
+        List<Category> GetAll();
     }
 }

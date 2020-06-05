@@ -8,6 +8,11 @@ namespace LiteCommerce.Admin.Models
 {
     public class ProductPaginationResult :PaginationResult
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Category { get; set; }
+        public string Supplier { get; set; }
         public List<Product> Data { get; set; }
     }
 }

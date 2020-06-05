@@ -92,10 +92,6 @@ namespace LiteCommerce.Admin.Controllers
                     string path = Path.Combine(Server.MapPath("~/Images/uploads"), FileName);
                     PhotoPath.SaveAs(path);
                     model.PhotoPath = FileName;
-                    //string folder = Server.MapPath("~/images/uploads");
-                    //string fileName = string.Format("{0}{1}", DateTime.Now.Ticks, Path.GetExtension(PhotoPath.FileName));
-                    //string filePath = Path.Combine(folder, fileName);
-                    //model.PhotoPath = fileName;
                 }
                 //TODO :Lưu dữ liệu nhập vào
                 if (model.EmployeeID == 0)

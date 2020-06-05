@@ -16,13 +16,13 @@ namespace LiteCommerce.DataLayers
         /// <param name="pagesize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        List<Product> List(int page, int pagesize, string searchValue);
+        List<Product> List(int page, int pagesize, string searchValue,string Category,string Supplier);
         /// <summary>
         /// Đếm số lượng Product
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        int Count(string searchValue);
+        int Count(string searchValue,string Category,string Supplier);
         /// <summary>
         /// Lấy Product
         /// </summary>

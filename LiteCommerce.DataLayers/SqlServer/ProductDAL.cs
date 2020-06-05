@@ -22,7 +22,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             throw new NotImplementedException();
         }
 
-        public int Count(string searchValue)
+        public int Count(string searchValue,string Category,string Supplier)
         {
             int count = 0;
             if (!string.IsNullOrEmpty(searchValue))
@@ -32,10 +32,12 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"select count(*) as count from Products 
-                    where @searchValue = N'' or ProductName like @searchValue";
+                    where ((@searchValue =N'') or (ProductName like @searchValue)) and (((@Category =N'') or (CategoryID like @Category)) and ((@Supplier =N'') or (SupplierID like @Supplier)) and (ProductName like @searchValue))";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                cmd.Parameters.AddWithValue("@Category", Category);
+                cmd.Parameters.AddWithValue("@Supplier", Supplier);
                 count = Convert.ToInt32(cmd.ExecuteScalar());
                 connection.Close();
             }
@@ -52,7 +54,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             throw new NotImplementedException();
         }
 
-        public List<Product> List(int page, int pageSize, string searchValue)
+        public List<Product> List(int page, int pageSize, string searchValue,string Category,string Supplier)
         {
             List<Product> data = new List<Product>();
             if (!string.IsNullOrEmpty(searchValue))
@@ -67,7 +69,7 @@ namespace LiteCommerce.DataLayers.SqlServer
 	                        select row_number() over(order by ProductName) as RowNumber,
 			                        Products.*
 	                        from Products
-	                        where (@searchValue =N'') or (ProductName like @searchValue)
+	                        where ((@searchValue =N'') or (ProductName like @searchValue)) and ((@Category =N'') or (CategoryID like @Category) and (@Supplier =N'') or (SupplierID like @Supplier))
                         ) as t
                         where t.RowNumber between  (@page-1)*@pageSize + 1 and @page*@pageSize
                         order by t.RowNumber";
@@ -76,6 +78,8 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.Parameters.AddWithValue("@page", page);
                 cmd.Parameters.AddWithValue("@pageSize", pageSize);
                 cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                cmd.Parameters.AddWithValue("@Category", Category);
+                cmd.Parameters.AddWithValue("@Supplier", Supplier);
                 using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
                     while (reader.Read())

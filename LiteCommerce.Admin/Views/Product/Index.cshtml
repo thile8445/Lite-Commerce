@@ -6,14 +6,27 @@
 <div class="box box-primary">
     <div class="box-body">
         <form action="~/Product" method="get">
-            <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Input search value..." name="searchValue" value="@Model.SearchValue">
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary btn-flat">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(m => m.Category, 
+                      SelectListHelper.Categories(), new { @class = "form-control" })                  
+                </div>
+                <div class="col-sm-3">   
+                    @Html.DropDownListFor(m => m.Supplier,
+                      SelectListHelper.Suppliers(), new { @class = "form-control" })
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group ">
+                        @Html.TextBoxFor(m =>m.SearchValue, new { @class="form-control", @placeholder= "Input search value..." })
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+
+                    </div>
+                </div>
+                </div>
         </form>
     </div>
 </div>
@@ -90,20 +103,41 @@
     </div>
     <div class="box-footer clearfix text-center">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="~/Product?page=1&searchValue=@Model.SearchValue">«</a></li>
-            @for (int page = 1; page <= Model.PageCount; page++)
+            @if (Model.Page > 1)
             {
-                if (page == Model.Page)
-                {
-                    <li class="active"><a href="#">@page</a></li>
-                }
-                else
-                {
-                    <li><a href="~/Product?page=@page&searchValue=@Model.SearchValue">@page</a></li>
-                }
-
+                <li><a href="~/Product?page=@(Model.Page - 1)@Model.SearchValue">&laquo;</a></li>
             }
-            <li><a href="~/Product?page=@Model.PageCount&searchValue=@Model.SearchValue">»</a></li>
+            @if (Model.Page > 3)
+            {
+                <li><a href="~/Product?page=1@(Model.SearchValue)">1</a></li>
+                <li class="dots"><a href="#">...</a></li>
+            }
+            @if (Model.Page - 2 > 0)
+            {
+                <li><a href="~/Product?page=@(Model.Page-2)@Model.SearchValue">@(Model.Page - 2)</a></li>
+            }
+            @if (Model.Page - 1 > 0)
+            {
+                <li><a href="~/Product?page=@(Model.Page-1)@Model.SearchValue">@(Model.Page - 1)</a></li>
+            }
+            <li class="active"><a href="~/Product?page=@Model.Page@Model.SearchValue">@Model.Page</a></li>
+            @if (Model.Page + 1 < Model.PageCount + 1)
+            {
+                <li><a href="~/Product?page=@(Model.Page+1)@Model.SearchValue">@(Model.Page + 1)</a></li>
+            }
+            @if (Model.Page + 2 < Model.PageCount + 1)
+            {
+                <li><a href="~/Product?page=@(Model.Page+2)@Model.SearchValue">@(Model.Page + 2)</a></li>
+            }
+            @if (Model.Page < Model.PageCount - 2)
+            {
+                <li class="dots"><a href="#">...</a></li>
+                <li><a href="~/Product?page=@Model.PageCount@Model.SearchValue">@Model.PageCount</a></li>
+            }
+            @if (Model.Page < Model.PageCount)
+            {
+                <li><a href="~/Product?page=@(Model.Page + 1)@Model.SearchValue">&raquo;</a></li>
+            }
         </ul>
     </div>
 </div>

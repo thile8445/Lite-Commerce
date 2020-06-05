@@ -88,15 +88,28 @@ namespace LiteCommerce.BusinessLayers
             rowCount = CategoryDB.Count(searchValue);
             return CategoryDB.List(page, pageSize, searchValue);
         }
-
-        public static List<Product> ListOfProducts(int page, int pageSize, string searchValue, out int rowCount)
+        public static List<Category> GetAllCategories()
+        {
+            return CategoryDB.GetAll();
+        }
+        public static List<Supplier> GetAllSuppliers()
+        {
+            return SupplierDB.GetAll();
+        }
+        public static List<Product> ListOfProducts(int page, int pageSize, string searchValue,string Category,string Supplier, out int rowCount)
         {
             if (page < 1)
                 page = 1;
             if (pageSize < 0)
                 pageSize = 20;
-            rowCount = ProductDB.Count(searchValue);
-            return ProductDB.List(page, pageSize, searchValue);
+            if (Category.Equals("0"))
+            {
+                Category = "";
+            }
+            if (Supplier.Equals("0"))
+                Supplier = "";
+            rowCount = ProductDB.Count(searchValue,Category,Supplier);
+            return ProductDB.List(page, pageSize, searchValue,Category,Supplier);
         }
         /// <summary>
         /// Lấy 1 supplier 
@@ -244,6 +257,7 @@ namespace LiteCommerce.BusinessLayers
         {
             return CustomerDB.Update(data);
         }
+
         #endregion
     }
 

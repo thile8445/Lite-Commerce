@@ -14,17 +14,19 @@ namespace LiteCommerce.Admin.Controllers
     {
         // GET: Product
 
-        public ActionResult Index(int page = 1, string searchValue = "")
+        public ActionResult Index(int page = 1, string searchValue = "",string Category = "",string Supplier = "")
         {
             int pageSize = 5;
             int rowCount = 0;
-            List<Product> ListOfProducts = CatalogBLL.ListOfProducts(page, pageSize, searchValue, out rowCount);
+            List<Product> ListOfProducts = CatalogBLL.ListOfProducts(page, pageSize, searchValue,Category,Supplier, out rowCount);
             var model = new ProductPaginationResult()
             {
                 Page = page,
                 PageSize = pageSize,
                 RowCount = rowCount,
                 SearchValue = searchValue,
+                Supplier = Supplier,
+                Category = Category,
                 Data = ListOfProducts
             };
             return View(model);
@@ -41,5 +43,6 @@ namespace LiteCommerce.Admin.Controllers
             }
             return View();
         }
+
     }
 }
