@@ -42,20 +42,8 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label>Country:</label>
-                    <select class="form-control" name="Country">
-                        <option value="">-- Choose Country --</option>
-                        @foreach (var country in SelectListHelper.Countries())
-                        {
-                            if (Model.Country == country.Value)
-                            {
-                                <option value="@country.Value" selected>@country.Text</option>
-                            }
-                            else
-                            {
-                                <option value="@country.Value">@country.Text</option>
-                            }
-                        }
-                    </select>
+                    @Html.DropDownListFor(m => m.Country,
+                      SelectListHelper.Countries(), new { @class = "form-control" })
                 </div>
                 <div class="col-sm-6">
                     <label>City:</label>

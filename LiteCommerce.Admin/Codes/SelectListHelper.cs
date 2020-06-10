@@ -14,12 +14,20 @@ namespace LiteCommerce.Admin
         /// Các quốc gia 
         /// </summary>
         /// <returns></returns>
-        public static List<SelectListItem> Countries()
+        public static List<SelectListItem> Countries(bool allSelectAll = true)
         {
+            List<Country> getList = new List<Country>();
+            getList = CountryBLL.getList();
             List<SelectListItem> List = new List<SelectListItem>();
-            List.Add(new SelectListItem() { Value = "USA", Text = "United States" });
-            List.Add(new SelectListItem() { Value = "UK", Text = "England" });
-            List.Add(new SelectListItem() { Value = "VN", Text = "VietNam" });
+            if (allSelectAll)
+            {
+                List.Add(new SelectListItem() { Value = "0", Text = "-- All Countries --" });
+
+            }
+            foreach (var country in getList)
+            {
+                List.Add(new SelectListItem { Value = country.Abbreviation, Text = country.CountryName });
+            }
             return List;
         }
         public static List<SelectListItem> Categories(bool allSelectAll = true)
@@ -29,9 +37,7 @@ namespace LiteCommerce.Admin
             List<SelectListItem> List = new List<SelectListItem>();
             if (allSelectAll)
             {
-                List.Add(new SelectListItem() { Value = "0", Text = "-- All Categories --" });
-                
-                
+                List.Add(new SelectListItem() { Value = "0", Text = "-- All Categories --" });               
                 
             }
             foreach (var category in getAll)

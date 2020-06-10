@@ -84,22 +84,6 @@
         </div>
 </form>
 <div class="box-footer clearfix text-center">
-    @*<ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="~Supplier?page=1&searchValueValue=@Model.searchValueValue">«</a></li>
-            @for (int page = 1; page <= Model.PageCount; page++)
-            {
-                if (page == Model.Page)
-                {
-                    <li class="active"><a href="#">@page</a></li>
-                }
-                else
-                {
-                    <li ><a href="~/Supplier?page=@page&searchValueValue=@Model.searchValueValue">@page</a></li>
-                }
-
-            }
-            <li><a href="~Supplier?page=@Model.PageCount&searchValueValue=@Model.searchValueValue">»</a></li>
-        </ul>*@
     <ul class="pagination pagination-sm no-margin pull-right">
         @if (Model.Page > 1)
             {

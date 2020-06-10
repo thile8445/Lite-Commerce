@@ -16,6 +16,9 @@ namespace LiteCommerce.Admin
             CatalogBLL.Initialize(connectionString);
             EmloyeeBLL.Initialize(connectionString);
             OrderBLL.Initialize(connectionString);
+            CountryBLL.Initialize(connectionString);
+            AttributeBLL.Initialize(connectionString);
+            ProductAttributeBLL.Initialize(connectionString);
         }
     }
 }

@@ -258,6 +258,44 @@ namespace LiteCommerce.BusinessLayers
             return CustomerDB.Update(data);
         }
 
+
+        /// <summary>
+        /// Lấy 1 Product 
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
+        public static Product GetProduct(int productID)
+        {
+            return ProductDB.Get(productID);
+        }
+        /// <summary>
+        /// thêm 1 Product
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int AddProduct(Product data)
+        {
+            return ProductDB.Add(data);
+        }
+        /// <summary>
+        /// xóa 1 danh sách Product
+        /// </summary>
+        /// <param name="ProductIDs"></param>
+        /// <returns></returns>
+        public static int DeleteProducts(int[] ProductIDs)
+        {
+            return ProductDB.Delete(ProductIDs);
+        }
+        /// <summary>
+        /// update 1 Product
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool UpdateProduct(Product data)
+        {
+            return ProductDB.Update(data);
+        }
+
         #endregion
     }
 

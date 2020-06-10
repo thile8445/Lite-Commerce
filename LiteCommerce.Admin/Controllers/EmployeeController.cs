@@ -52,7 +52,7 @@ namespace LiteCommerce.Admin.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Input(Employee model, HttpPostedFileBase PhotoPath)
+        public ActionResult Input(Employee model, HttpPostedFileBase PhotoPath,string PhotoPathDraft)
         {
             try
             {
@@ -100,6 +100,10 @@ namespace LiteCommerce.Admin.Controllers
                 }
                 else
                 {
+                    if (string.IsNullOrEmpty(model.PhotoPath))
+                    {
+                        model.PhotoPath = PhotoPathDraft;
+                    }
                     EmloyeeBLL.UpdateEmployee(model);
                 }
                 return RedirectToAction("Index");
