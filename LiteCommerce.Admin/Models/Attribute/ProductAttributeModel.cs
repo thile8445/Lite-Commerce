@@ -5,11 +5,10 @@ using System.Web;
 
 namespace LiteCommerce.Admin.Models.Attribute
 {
-    public class ProductAttributeModel :Attribute
+    public class ProductAttributeModel 
     {
-        public string AttributeValues { get; set; }
-        public int DisplayOrder { get; set; }
+
         public int ProductID { get; set; }
-        public int ProductAttributeID { get; set; }
+        public List<DomainModels.ProductAttributes> ListProductAttributes {get;set;}
     }
 }

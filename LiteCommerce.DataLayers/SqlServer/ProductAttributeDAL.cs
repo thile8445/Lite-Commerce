@@ -103,6 +103,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                             AttributeID = Convert.ToInt32(reader["AttributeID"]),
                             ProductID = Convert.ToInt32(reader["ProductID"]),
                             AttributeName = Convert.ToString(reader["AttributeName"]),
+                            AttributeValues = Convert.ToString(reader["AttributeValues"]),
                             DisplayOrder = Convert.ToInt32(reader["DisplayOrder"])
                         });
                     }

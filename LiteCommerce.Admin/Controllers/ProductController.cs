@@ -90,8 +90,8 @@ namespace LiteCommerce.Admin.Controllers
                 if (model.ProductID == 0)
                 {
 
-                    CatalogBLL.AddProduct(model);
-                    return RedirectToAction("Attribute", new { CategoryID= model.CategoryID , ProductID =model.ProductID,Type=Type});
+                    int productID = CatalogBLL.AddProduct(model);
+                    return RedirectToAction("Attribute", new { CategoryID= model.CategoryID , ProductID = productID, Type=Type});
                 }
                 else
                 {
@@ -129,71 +129,75 @@ namespace LiteCommerce.Admin.Controllers
         public ActionResult Attribute(string CategoryID,string ProductID,string Type="")
         {
             /// Danh sach name attribute
-            List<DomainModels.Attribute> data = new List<DomainModels.Attribute>();
-            data = AttributeBLL.getAll(Convert.ToInt32(CategoryID));
+            List<DomainModels.Attribute> getAttribute = new List<DomainModels.Attribute>();
+            getAttribute = AttributeBLL.getAll(Convert.ToInt32(CategoryID));
 
+            // Lấy danh sách tất cả các Attribute theo ProductID
+            List<ProductAttributes> getAll = ProductAttributeBLL.getAll(Convert.ToInt32(ProductID));
             if (Type.Equals("Update"))
-            {
-                List<ProductAttributeModel> editProductAttributeModel = new List<ProductAttributeModel>();
-                // Lấy danh sách tất cả các Attribute theo ProductID
-                List<ProductAttributes> getAll = ProductAttributeBLL.getAll(Convert.ToInt32(ProductID));
+            {           
                 if(getAll.Count == 0)
                 {
                     Type = "Add";
                 }
                 else if(getAll != null)
-                { 
-                    foreach (var attribute in getAll)
+                {
+                    ProductAttributeModel editProductAttributeModel = new ProductAttributeModel()
                     {
-                        editProductAttributeModel.Add(new ProductAttributeModel
-                        {
-                            ProductAttributeID = attribute.AttributeID,
                             ProductID = Convert.ToInt32(ProductID),
-                            AttributeName = attribute.AttributeName,
-                            AttributeValues = attribute.AttributeValues,
-                            DisplayOrder = attribute.DisplayOrder
-                        });
-                    
-                    }
+                            ListProductAttributes = getAll
+                    };                  
                     ViewBag.Type = "Update";
+                    ViewBag.ProductID = ProductID;
                     return View(editProductAttributeModel);
                 }
             }
 
             if (Type.Equals("Add"))
             {
-                List<ProductAttributeModel> addProductAttributeModel = new List<ProductAttributeModel>();
-                foreach (var attribute in data)
+                List<DomainModels.ProductAttributes> getNameAttribute = new List<DomainModels.ProductAttributes>();
+                foreach(var attribute in getAttribute)
                 {
-                    addProductAttributeModel.Add(new ProductAttributeModel
+                    getNameAttribute.Add(new DomainModels.ProductAttributes()
                     {
-                        ProductID = Convert.ToInt32(ProductID),
-                        AttributeName = attribute.AttributeName,
-                        AttributeValues = ""
+                        AttributeName = attribute.AttributeName
                     });
                 }
+                ProductAttributeModel addProductAttribute = new ProductAttributeModel()
+                {
+                    ProductID = Convert.ToInt32(ProductID),
+                    ListProductAttributes = getNameAttribute
+                };
+
                 ViewBag.Type = "Add";
-                return View(addProductAttributeModel);
-            }
-            
-            
-           
-            return View(data);
+                ViewBag.ProductID = ProductID;
+                return View(addProductAttribute);
+            }       
+            return View();
         }
         [HttpPost]
-        public ActionResult Attribute(List<ProductAttributeModel> model, string CategoryID, string ProductID,string Type="")
+        public ActionResult Attribute(ProductAttributeModel model,string ProductID , string[] AttributeNames, string[] AttributeValues,string[] DisplayOrders, string Type="",string AttributeID = "")
         {
-            List<DomainModels.ProductAttributes> data = new List<DomainModels.ProductAttributes>();
-            foreach(var attribute in model)
+            List<DomainModels.ProductAttributes> data = new List<ProductAttributes>();
+           
+            int productId = Convert.ToInt32(ProductID);
+            int count = AttributeNames.Count();
+            for ( int i = 0; i < count; i++)
             {
-                data.Add(new DomainModels.ProductAttributes
+                data.Add(new DomainModels.ProductAttributes()
                 {
-                    ProductID =Convert.ToInt32(attribute.ProductID),
-                    AttributeName = attribute.AttributeName,
-                    AttributeValues = attribute.AttributeValues,
-                    DisplayOrder =Convert.ToInt32(attribute.DisplayOrder)
+                    AttributeID = Convert.ToInt32(AttributeID),
+                    ProductID = productId,
+                    AttributeName = AttributeNames[i],
+                    AttributeValues = AttributeValues[i],
+                    DisplayOrder =Convert.ToInt32(DisplayOrders[i])
                 });
             }
+            //if(data != null)
+            //{
+            //    return Json(data);
+            //}
+            // TODO : looi
             if (Type.Equals("Add"))
             {
                 ProductAttributeBLL.Add(data);
@@ -202,8 +206,7 @@ namespace LiteCommerce.Admin.Controllers
             {
                 ProductAttributeBLL.Update(data);
             }
-            return View(data);
+            return RedirectToAction("Input/" + model.ProductID);
         }
-
     }
 }
