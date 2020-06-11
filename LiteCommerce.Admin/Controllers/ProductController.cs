@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace LiteCommerce.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = WebUserRoles.MANAGEDATA)]
     public class ProductController : Controller
     {
         // GET: Product

@@ -62,7 +62,7 @@ namespace LiteCommerce.Admin.Controllers
                 {
                     UserID = user.UserID,
                     FullName = user.FullName,
-                    GroupName = "Employee",
+                    GroupName = user.Roles,
                     LoginTime = DateTime.Now,
                     SessionID = Session.SessionID,
                     ClientIP = Request.UserHostAddress,

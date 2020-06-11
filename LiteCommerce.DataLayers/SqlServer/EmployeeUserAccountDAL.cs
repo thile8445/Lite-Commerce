@@ -24,7 +24,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = @"select EmployeeID,Email,LastName,FirstName,PhotoPath,Title from Employees where Email = @username and Password = @password";
+                cmd.CommandText = @"select EmployeeID,Email,LastName,FirstName,PhotoPath,Roles,Title from Employees where Email = @username and Password = @password";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@username", username);
@@ -38,7 +38,8 @@ namespace LiteCommerce.DataLayers.SqlServer
                             UserID = Convert.ToString(reader["Email"]),
                             FullName = Convert.ToString(reader["LastName"])+" " + (Convert.ToString(reader["FirstName"])),
                             Photo = Convert.ToString(reader["PhotoPath"]),
-                            Title = Convert.ToString(reader["Title"])
+                            Title = Convert.ToString(reader["Title"]),
+                            Roles = Convert.ToString(reader["Roles"])
                         };
                     }
                 }

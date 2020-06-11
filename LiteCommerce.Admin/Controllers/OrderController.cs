@@ -15,7 +15,7 @@ namespace LiteCommerce.Admin.Controllers
         public ActionResult Index()
         {
             int rowCount = 0;
-            List<Order> model = OrderBLL.ListOfOrders(1, 10, "", out rowCount);
+            List<Order> model = OrderBLL.ListOfOrders(1, 4, "", out rowCount);
             ViewBag.rowCount = rowCount;
             return View(model);
         }

@@ -24,5 +24,6 @@ namespace LiteCommerce.DomainModels
         /// </summary>
         public string Photo { get; set; }
         public string Title { get; set; }
+        public string Roles { get; set; }
     }
 }

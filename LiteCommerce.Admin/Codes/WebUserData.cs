@@ -40,6 +40,7 @@ namespace LiteCommerce.Admin
             public string Photo { get; set; }
 
             public string Title { get; set; }
+            
 
         /// <summary>
         /// Chuyển thông tin tài khoản đăng nhập thành chuỗi để ghi Cookie

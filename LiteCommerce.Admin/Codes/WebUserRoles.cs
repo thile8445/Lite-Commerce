@@ -21,6 +21,14 @@ namespace LiteCommerce.Admin
             /// <summary>
             /// Quản trị hệ thống
             /// </summary>
-            public const string ADMINISTRATOR = "administrator";            
+            public const string ADMINISTRATOR = "administrator";
+            /// <summary>
+            /// Quản trị tài khoản
+            /// </summary>
+            public const string MANAGEACCOUNT = "manageaccount";
+            /// <summary>
+            /// Quản trị dữ liệu liên quan đến catalog
+            /// </summary>
+            public const string MANAGEDATA = "managedata";     
       }
 }

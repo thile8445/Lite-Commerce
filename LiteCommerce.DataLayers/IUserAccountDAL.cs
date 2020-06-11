@@ -12,7 +12,7 @@ namespace LiteCommerce.DataLayers
     /// </summary>
     public interface IUserAccountDAL
     {
-        //int ChangePassword(string passWord, string newPassWord);
+       
         /// <summary>
         /// Kiểm tra UserName và Password có hợp lệ không?
         /// Nếu hợp lệ trả về thông tin của User,

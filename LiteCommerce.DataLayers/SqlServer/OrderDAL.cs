@@ -44,7 +44,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "SELECT * FROM Order";
+                cmd.CommandText = @"SELECT * FROM Orders";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
@@ -55,7 +55,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                         {
                             OrderID = Convert.ToInt32(reader["OrderID"]),
                             CustomerID = Convert.ToString(reader["CustomerID"]),
-                            EmloyeeID = Convert.ToInt32(reader["EmloyeeID"]),
+                            EmployeeID = Convert.ToInt32(reader["EmployeeID"]),
                             Freight = Convert.ToDecimal(reader["Freight"]),
                             OrderDate = Convert.ToDateTime(reader["OrderDate"]),
                             RequiredDate = Convert.ToDateTime(reader["RequiredDate"]),
@@ -63,8 +63,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                             ShipAddress = Convert.ToString(reader["ShipAddress"]),
                             ShipCity = Convert.ToString(reader["ShipCity"]),
                             ShipCountry = Convert.ToString(reader["ShipCountry"]),
-                            ShipperID = Convert.ToInt32(reader["ShipperID"]),
-                            
+                            ShipperID = Convert.ToInt32(reader["ShipperID"])                       
                         });
                     }
                 }
