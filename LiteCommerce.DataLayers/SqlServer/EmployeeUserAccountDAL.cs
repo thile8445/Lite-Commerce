@@ -24,7 +24,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = @"select * from Employees where Email = @username and Password = @password";
+                cmd.CommandText = @"select EmployeeID,Email,LastName,FirstName,PhotoPath,Title from Employees where Email = @username and Password = @password";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 cmd.Parameters.AddWithValue("@username", username);

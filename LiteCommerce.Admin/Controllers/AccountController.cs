@@ -1,4 +1,5 @@
-﻿using LiteCommerce.BusinessLayers;
+﻿using LiteCommerce.Admin.Codes;
+using LiteCommerce.BusinessLayers;
 using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace LiteCommerce.Admin.Controllers
             //}           
 
             //kiểm tra thông tin tài khoản
-            password = UserAccountBLL.EncodeMD5(password);
+            password = EncodeMD5.EnCodeMD5(password);
             UserAccount user = UserAccountBLL.Authorize(email,password,UserAccountTypes.Employee);
             if(user != null)
             {
