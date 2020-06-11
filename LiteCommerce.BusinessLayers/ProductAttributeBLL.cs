@@ -28,9 +28,13 @@ namespace LiteCommerce.BusinessLayers
         {
             return ProductAttributeDB.Update(ProductAttributes);
         }
-        public static int Delete(int[] ProductAttributes)
+        public static int Delete(int[] ProductIDs)
         {
-            return ProductAttributeDB.Delete(ProductAttributes);
+            return ProductAttributeDB.Delete(ProductIDs);
+        }
+        public static bool CheckProductInAttibute(int ProductID)
+        {
+            return ProductAttributeDB.CheckProductInAttibute(ProductID);
         }
     }
 }

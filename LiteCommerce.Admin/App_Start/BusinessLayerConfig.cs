@@ -19,6 +19,7 @@ namespace LiteCommerce.Admin
             CountryBLL.Initialize(connectionString);
             AttributeBLL.Initialize(connectionString);
             ProductAttributeBLL.Initialize(connectionString);
+            UserAccountBLL.Initialize(connectionString);
         }
     }
 }
