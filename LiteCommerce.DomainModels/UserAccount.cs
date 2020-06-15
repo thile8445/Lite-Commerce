@@ -11,6 +11,7 @@ namespace LiteCommerce.DomainModels
     /// </summary>
     public class UserAccount
     {
+        public int ValueID { get; set; }
         /// <summary>
         /// Tài khoản đăng nhập vào hệ thống
         /// </summary>

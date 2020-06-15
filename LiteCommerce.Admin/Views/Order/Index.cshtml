@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LiteCommerce.DomainModels.Order>
+﻿@model LiteCommerce.Admin.Models.OrderPaginationResult
 @{
     ViewBag.Title = "Manage Order";
     int i = 0;
@@ -17,7 +17,7 @@
 </div>
 <div class="container-fluid row lc-margin-bottom">
     <div class="col-sm-8">
-        There are <b>@ViewBag.rowCount</b> Category. Page 1/100
+        There are <b>@Model.RowCount</b> Orders. Page @string.Format("{0}/{1}", Model.Page, Model.PageCount)
     </div>
     <div class="col-md-4 text-right">
         <div class="btn-group">
@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var order in Model)
+                @foreach (var order in Model.Data)
                 {
                     <tr>
                         <td>
@@ -51,7 +51,7 @@
                         <td>@(++i)</td>
                         <td>
                             <span class="lc-company-name">
-                                New Orleans Cajun Delights
+                                @order.ShipAddress
                             </span>
                             <span class="lc-contact-title">
                                 Order Administrator:
@@ -79,7 +79,8 @@
             </tbody>
         </table>
     </div>
-    <div class="box-footer clearfix text-center">
+</div>
+<div class="box-footer clearfix text-center">
         <ul class="pagination pagination-sm no-margin pull-right">
             <li><a href="#">«</a></li>
             <li><a href="#">1</a></li>
@@ -88,4 +89,3 @@
             <li><a href="#">»</a></li>
         </ul>
     </div>
-</div>

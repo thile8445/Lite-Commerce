@@ -106,40 +106,45 @@
 </form>
 <div class="box-footer clearfix text-center">
     <ul class="pagination pagination-sm no-margin pull-right">
-        @if (Model.Page > 1)
+        <li><a href="~/Product?page=1&searchValue=@Model.SearchValue&Category=@Model.Category&Supplier=@Model.Supplier">«</a></li>
+        @{
+            int index = 1;
+            if (Model.Page - 5 <= 0)
             {
-            <li><a href="~/Product?page=@(Model.Page - 1)@Model.SearchValue">&laquo;</a></li>
-        }
-        @if (Model.Page > 3)
+                index = 1;
+            }
+            else if (Model.Page + 4 >= Model.PageCount)
             {
-            <li><a href="~/Product?page=1@(Model.SearchValue)">1</a></li>
-            <li class="dots"><a href="#">...</a></li>
-        }
-        @if (Model.Page - 2 > 0)
+                //index = Model.PageCount - 9 ;
+                index = Model.Page;
+            }
+            else
             {
-            <li><a href="~/Product?page=@(Model.Page-2)@Model.SearchValue">@(Model.Page - 2)</a></li>
+                index = Model.Page - 4;
+            }
         }
-        @if (Model.Page - 1 > 0)
+        @if (Model.Page - 5 > 0)
             {
-            <li><a href="~/Product?page=@(Model.Page-1)@Model.SearchValue">@(Model.Page - 1)</a></li>
+            <li><a href="#">...</a></li>
         }
-        <li class="active"><a href="~/Product?page=@Model.Page@Model.SearchValue">@Model.Page</a></li>
-        @if (Model.Page + 1 < Model.PageCount + 1)
+        @for (int page = index; page <= index + (Model.PageCount < 10 ? Model.PageCount - 1 : 9); page++)
+        {
+            if (page == Model.Page)
             {
-            <li><a href="~/Product?page=@(Model.Page+1)@Model.SearchValue">@(Model.Page + 1)</a></li>
-        }
-        @if (Model.Page + 2 < Model.PageCount + 1)
+                <li class="active"><a href="#">@page</a></li>
+            }
+            else
             {
-            <li><a href="~/Product?page=@(Model.Page+2)@Model.SearchValue">@(Model.Page + 2)</a></li>
+                <li><a href="~/Product?page=1&searchValue=@Model.SearchValue&Category=@Model.Category&Supplier=@Model.Supplier">@page</a></li>
+            }
+
         }
-        @if (Model.Page < Model.PageCount - 2)
-            {
-            <li class="dots"><a href="#">...</a></li>
-            <li><a href="~/Product?page=@Model.PageCount@Model.SearchValue">@Model.PageCount</a></li>
+        @if (Model.Page + 5 < Model.PageCount)
+        {
+            <li><a href="#">...</a></li>
         }
-        @if (Model.Page < Model.PageCount)
-            {
-            <li><a href="~/Product?page=@(Model.Page + 1)@Model.SearchValue">&raquo;</a></li>
-        }
+        <li><a href="~/Product?page=1&searchValue=@Model.SearchValue&Category=@Model.Category&Supplier=@Model.Supplier">»</a></li>
+
+
     </ul>
 </div>

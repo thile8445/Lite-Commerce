@@ -9,6 +9,6 @@ namespace LiteCommerce.DataLayers
 {
     public interface ICountryDAL
     {
-        List<Country> getAll();
+        List<Country> GetAll();
     }
 }

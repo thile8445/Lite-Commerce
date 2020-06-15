@@ -1,4 +1,5 @@
-﻿using LiteCommerce.BusinessLayers;
+﻿using LiteCommerce.Admin.Models;
+using LiteCommerce.BusinessLayers;
 using LiteCommerce.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -8,18 +9,27 @@ using System.Web.Mvc;
 
 namespace LiteCommerce.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles =WebUserRoles.STAFF)]
     public class OrderController : Controller
     {
         // GET: Order
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string searchValue = "")
         {
+            int pageSize = 3;
             int rowCount = 0;
-            List<Order> model = OrderBLL.ListOfOrders(1, 4, "", out rowCount);
-            ViewBag.rowCount = rowCount;
+            List<Order> ListOfOrder = OrderBLL.ListOfOrders(page, pageSize, "", out rowCount);
+            var model = new OrderPaginationResult()
+            {
+                Page = page,
+                PageSize = pageSize,
+                RowCount = rowCount,
+                SearchValue = searchValue,
+                Data = ListOfOrder
+                
+            };
             return View(model);
         }
-       
+
         public ActionResult Create(string id = "")
         {
             if (string.IsNullOrEmpty(id))

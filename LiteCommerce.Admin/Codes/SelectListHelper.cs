@@ -17,11 +17,11 @@ namespace LiteCommerce.Admin
         public static List<SelectListItem> Countries(bool allSelectAll = true)
         {
             List<Country> getList = new List<Country>();
-            getList = CountryBLL.getList();
+            getList = CountryBLL.GetList();
             List<SelectListItem> List = new List<SelectListItem>();
             if (allSelectAll)
             {
-                List.Add(new SelectListItem() { Value = "0", Text = "-- All Countries --" });
+                List.Add(new SelectListItem() { Value = "", Text = "-- Choose Country --" });
 
             }
             foreach (var country in getList)

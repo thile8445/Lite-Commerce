@@ -16,14 +16,14 @@ namespace LiteCommerce.DataLayers.SqlServer
         {
             this.connectionString = connectionString;
         }
-        public List<Country> getAll()
+        public List<Country> GetAll()
         {
             List<Country> data = new List<Country>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = @"Select * from Countries";
+                cmd.CommandText = @"Select * from Countries  order by CountryName asc";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection) )

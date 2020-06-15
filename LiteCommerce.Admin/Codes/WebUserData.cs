@@ -10,9 +10,10 @@ namespace LiteCommerce.Admin
       /// </summary>
       public class WebUserData
       {
+            public int ValueID { get; set; }
             /// <summary>
-            /// ID/tên đăng nhập của tài khoản
-            /// </summary>
+             /// ID/tên đăng nhập của tài khoản
+             /// </summary>
             public string UserID { get; set; }
             /// <summary>
             /// Tên gọi/tên hiển thị của tài khoản
@@ -48,7 +49,7 @@ namespace LiteCommerce.Admin
         /// <returns></returns>
         public string ToCookieString()
             {
-                  return string.Format($"{UserID}|{FullName}|{GroupName}|{LoginTime}|{SessionID}|{ClientIP}|{Photo}|{Title}");
+                  return string.Format($"{UserID}|{FullName}|{GroupName}|{LoginTime}|{SessionID}|{ClientIP}|{Photo}|{Title}|{ValueID}");
             }
 
             /// <summary>
@@ -61,10 +62,11 @@ namespace LiteCommerce.Admin
                   try
                   {
                         string[] infos = cookie.Split('|');
-                        if (infos.Length == 8)
+                        if (infos.Length == 9)
                         {
                               return new WebUserData()
                               {
+                                    
                                     UserID = infos[0],
                                     FullName = infos[1],
                                     GroupName = infos[2],
@@ -72,7 +74,8 @@ namespace LiteCommerce.Admin
                                     SessionID = infos[4],
                                     ClientIP = infos[5],
                                     Photo = infos[6],
-                                    Title = infos[7]
+                                    Title = infos[7],
+                                    ValueID = Convert.ToInt32(infos[8])
                               };
                         }
                         else

@@ -17,9 +17,9 @@ namespace LiteCommerce.BusinessLayers
         {
             CountryDB = new CountryDAL(connectionString);
         }
-        public static List<Country> getList()
+        public static List<Country> GetList()
         {
-            return CountryDB.getAll();
+            return CountryDB.GetAll();
         }
     }
 }

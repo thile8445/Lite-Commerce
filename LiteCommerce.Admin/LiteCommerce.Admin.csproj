@@ -172,6 +172,7 @@
     <Compile Include="Models\CategoryPaginationResult.cs" />
     <Compile Include="Models\CustomerPaginationResult.cs" />
     <Compile Include="Models\EmployeePaginationResult.cs" />
+    <Compile Include="Models\OrderPaginationResult.cs" />
     <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Models\Password\EmployeePassword.cs" />
     <Compile Include="Models\Password\Password.cs" />
@@ -188,7 +189,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\sai.jpg" />
+    <Content Include="Images\uploads\sai.jpg" />
     <Content Include="Images\uploads\lich.png" />
+    <Content Include="Images\uploads\unknown.jpg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
