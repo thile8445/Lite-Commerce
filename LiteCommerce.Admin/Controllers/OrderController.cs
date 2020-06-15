@@ -13,17 +13,18 @@ namespace LiteCommerce.Admin.Controllers
     public class OrderController : Controller
     {
         // GET: Order
-        public ActionResult Index(int page = 1, string searchValue = "")
+        public ActionResult Index(int page = 1, string searchValue = "",string country = "")
         {
-            int pageSize = 3;
+            int pageSize = 5;
             int rowCount = 0;
-            List<Order> ListOfOrder = OrderBLL.ListOfOrders(page, pageSize, "", out rowCount);
+            List<Order> ListOfOrder = OrderBLL.ListOfOrders(page, pageSize, "",country, out rowCount);
             var model = new OrderPaginationResult()
             {
                 Page = page,
                 PageSize = pageSize,
                 RowCount = rowCount,
                 SearchValue = searchValue,
+                ShipperCountry = country,
                 Data = ListOfOrder
                 
             };

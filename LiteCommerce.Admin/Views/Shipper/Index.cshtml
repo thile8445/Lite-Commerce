@@ -78,38 +78,38 @@
         <ul class="pagination pagination-sm no-margin pull-right">
             @if (Model.Page > 1)
             {
-                <li><a href="~/Shipper?page=@(Model.Page - 1)@Model.SearchValue">&laquo;</a></li>
+                <li><a href="~/Shipper?page=@(Model.Page - 1)&searchValue=@Model.SearchValue">&laquo;</a></li>
             }
             @if (Model.Page > 3)
             {
-                <li><a href="~/Shipper?page=1@(Model.SearchValue)">1</a></li>
+                <li><a href="~/Shipper?page=1&searchValue=@(Model.SearchValue)">1</a></li>
                 <li class="dots"><a href="#">...</a></li>
             }
             @if (Model.Page - 2 > 0)
             {
-                <li><a href="~/Shipper?page=@(Model.Page-2)@Model.SearchValue">@(Model.Page - 2)</a></li>
+                <li><a href="~/Shipper?page=@(Model.Page-2)&searchValue=@Model.SearchValue">@(Model.Page - 2)</a></li>
             }
             @if (Model.Page - 1 > 0)
             {
-                <li><a href="~/Shipper?page=@(Model.Page-1)@Model.SearchValue">@(Model.Page - 1)</a></li>
+                <li><a href="~/Shipper?page=@(Model.Page-1)&searchValue=@Model.SearchValue">@(Model.Page - 1)</a></li>
             }
-            <li class="active"><a href="~/Shipper?page=@Model.Page@Model.SearchValue">@Model.Page</a></li>
+            <li class="active"><a href="~/Shipper?page=@Model.Page&searchValue=@Model.SearchValue">@Model.Page</a></li>
             @if (Model.Page + 1 < Model.PageCount + 1)
             {
-                <li><a href="~/Shipper?page=@(Model.Page+1)@Model.SearchValue">@(Model.Page + 1)</a></li>
+                <li><a href="~/Shipper?page=@(Model.Page+1)&searchValue=@Model.SearchValue">@(Model.Page + 1)</a></li>
             }
             @if (Model.Page + 2 < Model.PageCount + 1)
             {
-                <li><a href="~/Shipper?page=@(Model.Page+2)@Model.SearchValue">@(Model.Page + 2)</a></li>
+                <li><a href="~/Shipper?page=@(Model.Page+2)&searchValue=@Model.SearchValue">@(Model.Page + 2)</a></li>
             }
             @if (Model.Page < Model.PageCount - 2)
             {
                 <li class="dots"><a href="#">...</a></li>
-                <li><a href="~/Shipper?page=@Model.PageCount@Model.SearchValue">@Model.PageCount</a></li>
+                <li><a href="~/Shipper?page=@Model.PageCount&searchValue=@Model.SearchValue">@Model.PageCount</a></li>
             }
             @if (Model.Page < Model.PageCount)
             {
-                <li><a href="~/Shipper?page=@(Model.Page + 1)@Model.SearchValue">&raquo;</a></li>
+                <li><a href="~/Shipper?page=@(Model.Page + 1)&searchValue=@Model.SearchValue">&raquo;</a></li>
             }
         </ul>
     </div>

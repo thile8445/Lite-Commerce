@@ -34,14 +34,14 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="searchValue"></param>
         /// <param name="rowCount"></param>
         /// <returns></returns>
-        public static List<Order> ListOfOrders(int page, int pageSize, string searchValue, out int rowCount)
+        public static List<Order> ListOfOrders(int page, int pageSize, string searchValue,string country ,out int rowCount)
         {
             if (page < 1)
                 page = 1;
             if (pageSize < 0)
                 pageSize = 20;
-            rowCount = OrderDB.Count(searchValue);
-            return OrderDB.List(page, pageSize, searchValue);
+            rowCount = OrderDB.Count(searchValue,country);
+            return OrderDB.List(page, pageSize, searchValue,country);
         }
         #endregion
     }

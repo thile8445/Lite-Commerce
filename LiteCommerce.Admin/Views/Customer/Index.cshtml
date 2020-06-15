@@ -14,7 +14,7 @@
                 
                 <div class="col-sm-6">
                     <div class="input-group ">
-                        @Html.TextBoxFor(m => m.SearchValue, new { @class = "form-control", @placeholder = "Input search value..." })
+                        <input type="text" class="form-control" placeholder="Input search value..." name="searchValue" value="@Model.SearchValue">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-primary btn-flat">
                                 <i class="fa fa-search"></i>
@@ -96,43 +96,40 @@
 </form>
 <div class="box-footer clearfix text-center">
     <ul class="pagination pagination-sm no-margin pull-right">
-        <li><a href="~/Customer?page=1&searchValue=@Model.SearchValue&country=@Model.country">«</a></li>
-        @{
-            int index = 1;
-            if (Model.Page - 5 <= 0)
+        @if (Model.Page > 1)
             {
-                index = 1;
-            }
-            else if (Model.Page + 4 >= Model.PageCount)
-            {
-                //index = Model.PageCount - 9 ;
-                index = Model.Page;
-            }
-            else
-            {
-                index = Model.Page - 4;
-            }
+            <li><a href="~/Customer?page=@(Model.Page - 1)&searchValue=@Model.SearchValue&country=@Model.country">&laquo;</a></li>
         }
-        @if (Model.Page - 5 > 0)
+        @if (Model.Page > 3)
             {
-            <li><a href="#">...</a></li>
+            <li><a href="~/Customer?page=1&searchValue=@(Model.SearchValue)&country=@Model.country">1</a></li>
+            <li class="dots"><a href="#">...</a></li>
         }
-        @for (int page = index; page <= index + (Model.PageCount < 10 ? Model.PageCount - 1 : 9); page++)
-        {
-            if (page == Model.Page)
+        @if (Model.Page - 2 > 0)
             {
-                <li class="active"><a href="#">@page</a></li>
-            }
-            else
+            <li><a href="~/Customer?page=@(Model.Page-2)&searchValue=@Model.SearchValue&country=@Model.country">@(Model.Page - 2)</a></li>
+        }
+        @if (Model.Page - 1 > 0)
             {
-                <li><a href="~/Customer?page=@page&searchValue=@Model.SearchValue&country=@Model.country">@page</a></li>
-            }
-
+            <li><a href="~/Customer?page=@(Model.Page-1)&searchValue=@Model.SearchValue&country=@Model.country">@(Model.Page - 1)</a></li>
         }
-        @if (Model.Page + 5 < Model.PageCount)
-        {
-            <li><a href="#">...</a></li>
+        <li class="active"><a href="~/Customer?page=@Model.Page&searchValue=@Model.SearchValue&country=@Model.country">@Model.Page</a></li>
+        @if (Model.Page + 1 < Model.PageCount + 1)
+            {
+            <li><a href="~/Customer?page=@(Model.Page+1)&searchValue=@Model.SearchValue&country=@Model.country">@(Model.Page + 1)</a></li>
         }
-        <li><a href="~/Customer?page=@Model.PageCount&searchValue=@Model.SearchValue&country=@Model.country">»</a></li>
+        @if (Model.Page + 2 < Model.PageCount + 1)
+            {
+            <li><a href="~/Customer?page=@(Model.Page+2)&searchValue=@Model.SearchValue&country=@Model.country">@(Model.Page + 2)</a></li>
+        }
+        @if (Model.Page < Model.PageCount - 2)
+            {
+            <li class="dots"><a href="#">...</a></li>
+            <li><a href="~/Customer?page=@Model.PageCount&searchValue=@Model.SearchValue&country=@Model.country">@Model.PageCount</a></li>
+        }
+        @if (Model.Page < Model.PageCount)
+            {
+            <li><a href="~/Customer?page=@(Model.Page + 1)&searchValue=@Model.SearchValue&country=@Model.country">&raquo;</a></li>
+        }
     </ul>
 </div>

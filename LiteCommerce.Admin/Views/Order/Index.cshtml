@@ -5,14 +5,28 @@
 }
 <div class="box box-primary">
     <div class="box-body">
-        <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Input search value...">
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-primary btn-flat">
-                    <i class="fa fa-search"></i>
-                </button>
-            </span>
-        </div>
+        <form action="~/Order" method="get">
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.DropDownList("Country",
+                      SelectListHelper.Countries(false),
+                      "--- Choose Shipper City ---",
+                      new { @class = "form-control" })
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="input-group ">
+                        <input type="text" class="form-control" placeholder="Input search value..." name="searchValue" value="@Model.SearchValue">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <div class="container-fluid row lc-margin-bottom">
@@ -54,10 +68,10 @@
                                 @order.ShipAddress
                             </span>
                             <span class="lc-contact-title">
-                                Order Administrator:
+                               @order.ShipCountry
                             </span>
                             <span class="lc-contact-name">
-                                Shelley Burke
+                               @order.ShipCity
                             </span>
                         </td>
                         <td>
@@ -81,11 +95,41 @@
     </div>
 </div>
 <div class="box-footer clearfix text-center">
-        <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
+    <ul class="pagination pagination-sm no-margin pull-right">
+        @if (Model.Page > 1)
+            {
+            <li><a href="~/Order?page=@(Model.Page - 1)&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">&laquo;</a></li>
+        }
+        @if (Model.Page > 3)
+            {
+            <li><a href="~/Order?page=1&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">1</a></li>
+            <li class="dots"><a href="#">...</a></li>
+        }
+        @if (Model.Page - 2 > 0)
+            {
+            <li><a href="~/Order?page=@(Model.Page-2)&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">@(Model.Page - 2)</a></li>
+        }
+        @if (Model.Page - 1 > 0)
+            {
+            <li><a href="~/Order?page=@(Model.Page-1)&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">@(Model.Page - 1)</a></li>
+        }
+        <li class="active"><a href="~/Customer?page=@Model.Page&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">@Model.Page</a></li>
+        @if (Model.Page + 1 < Model.PageCount + 1)
+            {
+            <li><a href="~/Order?page=@(Model.Page+1)&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">@(Model.Page + 1)</a></li>
+        }
+        @if (Model.Page + 2 < Model.PageCount + 1)
+            {
+            <li><a href="~/Order?page=@(Model.Page+2)&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">@(Model.Page + 2)</a></li>
+        }
+        @if (Model.Page < Model.PageCount - 2)
+            {
+            <li class="dots"><a href="#">...</a></li>
+            <li><a href="~/Order?page=@Model.PageCount&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">@Model.PageCount</a></li>
+        }
+        @if (Model.Page < Model.PageCount)
+            {
+            <li><a href="~/Order?page=@(Model.Page + 1)&searchValue=@Model.SearchValue&country=@Model.ShipperCountry">&raquo;</a></li>
+        }
+    </ul>
     </div>
