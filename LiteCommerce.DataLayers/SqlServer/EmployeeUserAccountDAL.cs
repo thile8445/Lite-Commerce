@@ -37,7 +37,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                         {
                             ValueID = Convert.ToInt32(reader["EmployeeID"]),
                             UserID = Convert.ToString(reader["Email"]),
-                            FullName = Convert.ToString(reader["LastName"])+" " + (Convert.ToString(reader["FirstName"])),
+                            FullName = Convert.ToString(reader["FirstName"])+" " + (Convert.ToString(reader["LastName"])),
                             Photo = Convert.ToString(reader["PhotoPath"]),
                             Title = Convert.ToString(reader["Title"]),
                             Roles = Convert.ToString(reader["Roles"])

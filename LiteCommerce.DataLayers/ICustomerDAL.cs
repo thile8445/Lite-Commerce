@@ -48,5 +48,6 @@ namespace LiteCommerce.DataLayers
         /// <param name="customerIDs"></param>
         /// <returns></returns>
         int Delete(string[] customerIDs);
+        List<Customer> GetAll();
     }
 }

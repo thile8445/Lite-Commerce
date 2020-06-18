@@ -16,7 +16,7 @@ namespace LiteCommerce.DataLayers
         /// <param name="pagesize"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        List<Order> List(int page, int pagesize, string searchValue,string country);
+        List<EntityOrder> List(int page, int pagesize, string searchValue,string Shipcountry);
         /// <summary>
         /// Đếm số lượng Order
         /// </summary>
@@ -48,5 +48,6 @@ namespace LiteCommerce.DataLayers
         /// <param name="orderIDs"></param>
         /// <returns></returns>
         int Delete(int[] orderIDs);
+        List<OrderDetails> GetAll(int OrderID);
     }
 }

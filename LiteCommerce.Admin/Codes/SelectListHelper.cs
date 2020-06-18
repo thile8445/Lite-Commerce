@@ -26,7 +26,7 @@ namespace LiteCommerce.Admin
             }
             foreach (var country in getList)
             {
-                List.Add(new SelectListItem { Value = country.Abbreviation, Text = country.CountryName });
+                List.Add(new SelectListItem { Value = country.CountryName, Text = country.CountryName });
             }
             return List;
         }
@@ -60,6 +60,57 @@ namespace LiteCommerce.Admin
             foreach (var supplier in getAll)
             {
                 List.Add(new SelectListItem() { Value = supplier.SupplierID.ToString(), Text = supplier.CompanyName });
+            }
+            return List;
+
+        }
+        public static List<SelectListItem> Shippers(bool allSelectAll = true)
+        {
+            List<Shipper> getAll = new List<Shipper>();
+            getAll = CatalogBLL.GetAllShipper();
+            List<SelectListItem> List = new List<SelectListItem>();
+            if (allSelectAll)
+            {
+                List.Add(new SelectListItem() { Value = "", Text = "-- All Shippers --" });
+
+            }
+            foreach (var shipper in getAll)
+            {
+                List.Add(new SelectListItem() { Value = shipper.ShipperID.ToString(), Text = shipper.CompanyName });
+            }
+            return List;
+
+        }
+        public static List<SelectListItem> Customers(bool allSelectAll = true)
+        {
+            List<Customer> getAll = new List<Customer>();
+            getAll = CatalogBLL.GetAllCustomer();
+            List<SelectListItem> List = new List<SelectListItem>();
+            if (allSelectAll)
+            {
+                List.Add(new SelectListItem() { Value = "", Text = "-- All Customers --" });
+
+            }
+            foreach (var customer in getAll)
+            {
+                List.Add(new SelectListItem() { Value = customer.CustomerID, Text = customer.CompanyName });
+            }
+            return List;
+
+        }
+        public static List<SelectListItem> Employees(bool allSelectAll = true)
+        {
+            List<Employee> getAll = new List<Employee>();
+            getAll = EmloyeeBLL.GetAllEmployee();
+            List<SelectListItem> List = new List<SelectListItem>();
+            if (allSelectAll)
+            {
+                List.Add(new SelectListItem() { Value = "", Text = "-- All Employees --" });
+
+            }
+            foreach (var employee in getAll)
+            {
+                List.Add(new SelectListItem() { Value = employee.EmployeeID.ToString(), Text = employee.FirstName + " "+employee.LastName });
             }
             return List;
 

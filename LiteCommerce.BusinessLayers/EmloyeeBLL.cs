@@ -84,6 +84,10 @@ namespace LiteCommerce.BusinessLayers
         {
             return EmployeeDB.ChangePassword(id, password, nPassword, aPassword);
         }
+        public static List<Employee> GetAllEmployee()
+        {
+            return EmployeeDB.GetAll();
+        }
         #endregion
     }
 }

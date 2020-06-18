@@ -26,6 +26,10 @@ namespace LiteCommerce.BusinessLayers
         #endregion
 
         #region Khai báo các chức năng xử lý nghiệp vụ
+        public static int Add(Order data)
+        {
+            return OrderDB.Add(data);
+        }
         /// <summary>
         /// Hiển thị danh sách của orders
         /// </summary>
@@ -34,7 +38,7 @@ namespace LiteCommerce.BusinessLayers
         /// <param name="searchValue"></param>
         /// <param name="rowCount"></param>
         /// <returns></returns>
-        public static List<Order> ListOfOrders(int page, int pageSize, string searchValue,string country ,out int rowCount)
+        public static List<EntityOrder> ListOfOrders(int page, int pageSize, string searchValue,string country ,out int rowCount)
         {
             if (page < 1)
                 page = 1;
@@ -42,6 +46,15 @@ namespace LiteCommerce.BusinessLayers
                 pageSize = 20;
             rowCount = OrderDB.Count(searchValue,country);
             return OrderDB.List(page, pageSize, searchValue,country);
+        }
+        /// <summary>
+        /// Lấy tất cả các orderdetails và name theo OrderID
+        /// </summary>
+        /// <param name="OrderID"></param>
+        /// <returns></returns>
+        public static List<OrderDetails> GetAllOrderDetails(int OrderID)
+        {
+            return OrderDB.GetAll(OrderID);
         }
         #endregion
     }

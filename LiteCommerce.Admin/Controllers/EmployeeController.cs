@@ -1,4 +1,5 @@
-﻿using LiteCommerce.Admin.Models;
+﻿using LiteCommerce.Admin.Codes;
+using LiteCommerce.Admin.Models;
 using LiteCommerce.Admin.Models.Password;
 using LiteCommerce.BusinessLayers;
 using LiteCommerce.DomainModels;
@@ -70,8 +71,8 @@ namespace LiteCommerce.Admin.Controllers
                     ModelState.AddModelError("BirthDate", "BirthDate expected");
                 if (model.HireDate == DateTime.MinValue)
                     ModelState.AddModelError("HireDate", "HireDate expected");
-                if (model.HireDate.CompareTo(model.BirthDate) < 0)
-                    ModelState.AddModelError("Date", " expected");
+                if (Convert.ToDateTime(model.HireDate).CompareTo(Convert.ToDateTime(model.BirthDate)) <= 0)
+                    ModelState.AddModelError("Date", "Date expected");
                 if (string.IsNullOrEmpty(model.Email))
                     model.Email = "";
                 if (string.IsNullOrEmpty(model.Address))
@@ -154,6 +155,9 @@ namespace LiteCommerce.Admin.Controllers
                     ModelState.AddModelError("nPassword", "New password expected");
                 if (string.IsNullOrEmpty(model.aPassword))
                     ModelState.AddModelError("aPassword", "Password expected");
+                model.password = EncodeMD5.EnCodeMD5(model.password);
+                model.nPassword = EncodeMD5.EnCodeMD5(model.nPassword);
+                model.aPassword = EncodeMD5.EnCodeMD5(model.aPassword);
                 EmloyeeBLL.ChangePassword(model.Id, model.password, model.nPassword, model.aPassword);
                 return RedirectToAction("Input/" + model.Id);
             }

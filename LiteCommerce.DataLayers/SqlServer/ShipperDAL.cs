@@ -135,6 +135,33 @@ namespace LiteCommerce.DataLayers.SqlServer
             return data;
         }
 
+        public List<Shipper> GetAll()
+        {
+            List<Shipper> data = new List<Shipper>();
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select * from Shippers";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    while (reader.Read())
+                    {
+                        data.Add(new Shipper()
+                        {
+                            ShipperID = Convert.ToInt32(reader["ShipperID"]),
+                            CompanyName = Convert.ToString(reader["CompanyName"]),
+                            Phone = Convert.ToString(reader["Phone"])
+                        });
+                    }
+                }
+                connection.Close();
+            }
+            return data;
+        }
+
         public List<Shipper> List(int page, int pagesize, string searchValue)
         {
             List<Shipper> data = new List<Shipper>();

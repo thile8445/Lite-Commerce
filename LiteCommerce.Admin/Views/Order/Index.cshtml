@@ -8,7 +8,7 @@
         <form action="~/Order" method="get">
             <div class="row">
                 <div class="col-sm-6">
-                    @Html.DropDownList("Country",
+                    @Html.DropDownListFor(c => c.ShipperCountry,
                       SelectListHelper.Countries(false),
                       "--- Choose Shipper City ---",
                       new { @class = "form-control" })
@@ -49,9 +49,13 @@
                         <input type="checkbox" />
                     </th>
                     <th style="width:50px">#</th>
-                    <th style="width:auto">Name</th>
-                    <th style="width:200px">Address</th>
-                    <th style="width:200px">Contact Info</th>
+                    <th style="width:170px">CustomerCompanyName</th>
+                    <th style="width:170px">Shipper</th>
+                    <th style="width:170px">FullNameEmployee</th>
+                    <th style="width:170px">ShippedDate</th>
+                    <th style="width:170px">RequiredDate</th>
+                    <th style="width:170px">OrderDate</th>
+                    <th style="width:auto">Freight</th>
                     <th style="width:80px"></th>
                 </tr>
             </thead>
@@ -64,27 +68,51 @@
                         </td>
                         <td>@(++i)</td>
                         <td>
+                           
                             <span class="lc-company-name">
-                                @order.ShipAddress
+                               @order.CustomerCompanyName
                             </span>
-                            <span class="lc-contact-title">
-                               @order.ShipCountry
+                           
+                        </td>
+                        <td>
+
+                            <span class="lc-company-name">
+                                @order.ShipperCompanyName
                             </span>
+                            <p>
+                                <span class="lc-contact-title">
+                                 @order.ShipAddress-@order.ShipCity-@order.ShipCountry
+                                </span>
+                            </p>
+                          
+                        </td>
+                        <td>
                             <span class="lc-contact-name">
-                               @order.ShipCity
+                                @order.ShippedDate
                             </span>
                         </td>
                         <td>
-                            <span style="display:block">P.O. Box 78934</span>
-                            <span>New Orleans - USA</span>
+                            <span class="lc-contact-name">
+                                @order.FullName
+                            </span>
                         </td>
                         <td>
-                            <p style="display:block"><i class="fa fa-phone"></i> (100) 555-4822</p>
-                            <p style="display:block"><i class="fa fa-fax"></i> (100) 333-665411</p>
-                            <p style="display:block"><i class="fa fa-home"></i> https://neworleans.com</p>
+                            <span class="lc-contact-name">
+                                @order.RequiredDate 
+                            </span>
+                        </td>
+                        <td>
+                            <span class="lc-contact-name">
+                                @order.OrderDate
+                            </span>
+                        </td>
+                        <td>
+                            <span class="lc-contact-name">
+                                @order.Freight
+                            </span>
                         </td>
                         <td class="text-right">
-                            <a class="btn btn-sm btn-default" href="#">
+                            <a class="btn btn-sm btn-default" href="~/Order/Create/@order.OrderID">
                                 <i class="fa fa-edit"></i>
                             </a>
                         </td>

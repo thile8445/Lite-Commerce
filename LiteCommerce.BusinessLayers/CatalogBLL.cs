@@ -193,6 +193,10 @@ namespace LiteCommerce.BusinessLayers
         {
             return ShipperDB.Get(shipperID);
         }
+        public static List<Shipper> GetAllShipper()
+        {
+            return ShipperDB.GetAll();
+        }
         /// <summary>
         /// thêm 1 Shipper
         /// </summary>
@@ -229,6 +233,10 @@ namespace LiteCommerce.BusinessLayers
         public static Customer GetCustomer(string customerID)
         {
             return CustomerDB.Get(customerID);
+        }
+        public static List<Customer> GetAllCustomer()
+        {
+            return CustomerDB.GetAll();
         }
         /// <summary>
         /// thêm 1 Customer

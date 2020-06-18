@@ -8,7 +8,7 @@ namespace LiteCommerce.Admin.Models
 {
     public class OrderPaginationResult : PaginationResult
     {
-        public List<Order> Data { get; set; }
+        public List<EntityOrder> Data { get; set; }
         public string ShipperCountry { get; set; }
     }
 }

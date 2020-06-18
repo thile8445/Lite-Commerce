@@ -1,75 +1,66 @@
-﻿@{
+﻿@model LiteCommerce.DomainModels.EntityOrder
+@{
     
 }
 <div class="box box-primary">
-    <form role="form">
+    <form role="form" action="~/Order/Create" method="post">
         <div class="box-header text-right">
             <a href="~/Order">Back to List</a>
         </div>
         <div class="box-body">
-            <div class="form-group">
-                <label>Company Name:</label>
-                <input type="text" class="form-control" placeholder="Enter Company Name">
-            </div>
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label>Contact Name:</label>
-                    <input type="text" class="form-control" placeholder="Contact Name">
+                    <label>Customer CompanyName: @Html.ValidationMessage("CustomerCompanyName", new { @style = "color: red" })</label>
+                    @Html.DropDownListFor(c =>c.CustomerCompanyName,
+                   SelectListHelper.Customers(),new { @class = "form-control"})
                 </div>
                 <div class="col-sm-6">
-                    <label>Contact Title:</label>
-                    <input type="text" class="form-control" placeholder="Ex: Sale Manager">
+                    <label>Shipper CompanyName:@Html.ValidationMessage("ShipperCompanyName", new { @style = "color: red" })</label>
+                    @Html.DropDownListFor(c => c.ShipperCompanyName,
+                   SelectListHelper.Shippers(), new { @class = "form-control" })
                 </div>
             </div>
-            <div class="form-group">
-                <label>Address:</label>
-                <input type="text" class="form-control" placeholder="Address">
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label>Country:</label>
-                    <select class="form-control">
-                        <option value="">-- Choose Country --</option>
-                        <option value="USA">USA</option>
-                        <option value="UK">United Kingdom</option>
-                        <option value="CHINA">China</option>
-                        <option value="VN">Vietnam</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <label>City:</label>
-                    <input type="text" class="form-control" placeholder="Ex: New Orleans">
-                </div>
+            <div class="form-group ">                          
+                    <label>FullName Employee:@Html.ValidationMessage("FullName", new { @style = "color: red" })</label>
+                    @Html.DropDownListFor(c => c.FullName,
+                   SelectListHelper.Employees(), new { @class = "form-control" })
             </div>
             <div class="form-group row">
-                <div class="col-sm-6">
-                    <label>Phone:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <input type="text" class="form-control">
-                    </div>
+                <div class="col-sm-4">
+                    <label>Order Date:@Html.ValidationMessage("OrderDate", new { @style = "color: red" })</label>
+                    <input type="datetime" class="form-control" value="@Model.OrderDate" name="OrderDate">
                 </div>
-                <div class="col-sm-6">
-                    <label>Fax:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-fax"></i>
-                        </div>
-                        <input type="text" class="form-control">
-                    </div>
+                <div class="col-sm-4">
+                    <label>Required Date:@Html.ValidationMessage("RequiredDate", new { @style = "color: red" })
+                    @Html.ValidationMessage("Date", new { @style = "color: red" })
+                    </label>
+                    <input type="datetime" class="form-control" value="@Model.RequiredDate" name="RequiredDate">
+                </div>
+                <div class="col-sm-4">
+                    <label>Shipper Date:@Html.ValidationMessage("ShippedDate", new { @style = "color: red" })</label>
+                    <input type="datetime" class="form-control" value="@Model.ShippedDate" name="ShippedDate">
                 </div>
             </div>
             <div class="form-group">
-                <label>Home page:</label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-link"></i>
-                    </div>
-                    <input type="text" class="form-control" placeholder="ex: http://company.com">
+                <label>Address:@Html.ValidationMessage("ShipAddress", new { @style = "color: red" })</label>
+                <input type="text" class="form-control" placeholder="Address" value="@Model.ShipAddress" name="ShipAddress">
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label>Country:@Html.ValidationMessage("ShipCountry", new { @style = "color: red" })</label>
+                    @Html.DropDownListFor(c => c.ShipCountry,
+                    SelectListHelper.Countries(),new { @class = "form-control" })
+                </div>
+                <div class="col-sm-6">
+                    <label>City:@Html.ValidationMessage("ShipCity", new { @style = "color: red" })</label>
+                    <input type="text" class="form-control" placeholder="Ex: New Orleans" value="@Model.ShipCity" name="ShipCity">
                 </div>
             </div>
+            <div class="form-group ">
+                <label>Freight:@Html.ValidationMessage("Freight", new { @style = "color: red" })</label>
+                <input type="text" class="form-control" placeholder="Freight" value="@Model.Freight" name="Freight">
+            </div>
+          
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

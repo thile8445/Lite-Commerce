@@ -154,7 +154,7 @@ namespace LiteCommerce.DataLayers.SqlServer
 
         public Employee Get(int employeeID)
         {
-            Employee data = null;
+            Employee data = new Employee();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -187,6 +187,47 @@ namespace LiteCommerce.DataLayers.SqlServer
                             HireDate = Convert.ToDateTime(dbReader["HireDate"])
 
                         };
+                    }
+                }
+
+                connection.Close();
+            }
+            return data;
+        }
+
+        public List<Employee> GetAll()
+        {
+            List<Employee> data = new List<Employee>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"SELECT * FROM Employees ";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                using (SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    while (dbReader.Read())
+                    {
+                        data.Add(new Employee()
+                        {
+                            EmployeeID = Convert.ToInt32(dbReader["EmployeeID"]),
+                            FirstName = Convert.ToString(dbReader["FirstName"]),
+                            LastName = Convert.ToString(dbReader["LastName"]),
+                            Title = Convert.ToString(dbReader["Title"]),
+                            Address = Convert.ToString(dbReader["Address"]),
+                            City = Convert.ToString(dbReader["City"]),
+                            Country = Convert.ToString(dbReader["Country"]),
+                            Email = Convert.ToString(dbReader["Email"]),
+                            Password = Convert.ToString(dbReader["Password"]),
+                            PhotoPath = Convert.ToString(dbReader["PhotoPath"]),
+                            HomePhone = Convert.ToString(dbReader["HomePhone"]),
+                            Notes = Convert.ToString(dbReader["Notes"]),
+                            BirthDate = Convert.ToDateTime(dbReader["BirthDate"]),
+                            HireDate = Convert.ToDateTime(dbReader["HireDate"])
+
+                        });
                     }
                 }
 
