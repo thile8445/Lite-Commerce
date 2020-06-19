@@ -157,6 +157,7 @@
     <Compile Include="Codes\WebUserRoles.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -170,8 +171,10 @@
     </Compile>
     <Compile Include="Models\Attribute\ProductAttributeModel.cs" />
     <Compile Include="Models\CategoryPaginationResult.cs" />
+    <Compile Include="Models\CountryPaginationResult.cs" />
     <Compile Include="Models\CustomerPaginationResult.cs" />
     <Compile Include="Models\EmployeePaginationResult.cs" />
+    <Compile Include="Models\OrderDetailsView.cs" />
     <Compile Include="Models\OrderPaginationResult.cs" />
     <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Models\Password\EmployeePassword.cs" />
@@ -7458,6 +7461,8 @@
     <Content Include="Views\Employee\ChangePassword.cshtml" />
     <Content Include="Views\Product\Attribute.cshtml" />
     <Content Include="Views\Product\UpdateAttribute.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\Input.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

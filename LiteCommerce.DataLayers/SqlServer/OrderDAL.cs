@@ -97,14 +97,96 @@ namespace LiteCommerce.DataLayers.SqlServer
             return count;
         }
 
+        public string CustomerNameToID(string CustomerName)
+        {
+            string CustomerID = null;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"select CustomerID from Customers where CompanyName = @CompanyName ";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@CompanyName", CustomerName);
+                CustomerID = Convert.ToString(cmd.ExecuteScalar());
+
+                connection.Close();
+            }
+            return CustomerID;
+        }
+
         public int Delete(int[] orderIDs)
         {
             throw new NotImplementedException();
         }
 
-        public Order Get(int orderID)
+        public int EmployeeNametoID(string EmployeeName)
         {
-            throw new NotImplementedException();
+            int EmployeeID = 0;
+            string[] Name = EmployeeName.Split(' ');
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"select EmployeeID from Employees where LastName =@LastName and FirstName=@FirstName";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@LastName",Name[0]);
+                cmd.Parameters.AddWithValue("@FirstName",Name[1]);
+                EmployeeID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                connection.Close();
+            }
+            return EmployeeID;
+        }
+
+        public EntityOrder Get(int orderID)
+        {
+            EntityOrder data = new EntityOrder();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                    cmd.CommandText = @"SELECT  Orders.OrderID,Customers.CompanyName as CustomerCompanyName, 
+                             Shippers.CompanyName AS ShipperCompanyName, Orders.OrderDate, Orders.RequiredDate, 
+                             Orders.ShippedDate, Orders.Freight,
+                             Orders.ShipAddress, Orders.ShipCity, Orders.ShipCountry, Employees.LastName, 
+                             Employees.FirstName
+						     FROM  Customers INNER JOIN
+                             Orders ON Customers.CustomerID = Orders.CustomerID INNER JOIN
+                             Employees ON Orders.EmployeeID = Employees.EmployeeID INNER JOIN
+                             Shippers ON Orders.ShipperID = Shippers.ShipperID
+						     where OrderID = @OrderID";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@OrderID", orderID);
+                using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    if (reader.Read())
+                    {
+                        data = new EntityOrder()
+                        {
+                            OrderID = Convert.ToInt32(reader["OrderID"]),
+                            CustomerCompanyName = Convert.ToString(reader["CustomerCompanyName"]),
+                            FullName = Convert.ToString(reader["FirstName"]) + " " + Convert.ToString(reader["LastName"]),
+                            Freight = Convert.ToDecimal(reader["Freight"]),
+                            OrderDate = Convert.ToDateTime(reader["OrderDate"]),
+                            RequiredDate = Convert.ToDateTime(reader["RequiredDate"]),
+                            ShippedDate = Convert.ToDateTime(reader["ShippedDate"]),
+                            ShipAddress = Convert.ToString(reader["ShipAddress"]),
+                            ShipCity = Convert.ToString(reader["ShipCity"]),
+                            ShipCountry = Convert.ToString(reader["ShipCountry"]),
+                            ShipperCompanyName = Convert.ToString(reader["ShipperCompanyName"])
+                        };
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return data;
         }
 
         public List<OrderDetails> GetAll(int orderID)
@@ -196,6 +278,25 @@ namespace LiteCommerce.DataLayers.SqlServer
             }
 
             return data;
+        }
+
+        public int ShipperNametoID(string ShipperName)
+        {
+            int ShipperID = 0;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"select ShipperID from Shippers where CompanyName = @CompanyName ";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@CompanyName",ShipperName);
+                ShipperID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                connection.Close();
+            }
+            return ShipperID;
         }
 
         public bool Update(Order data)

@@ -27,7 +27,7 @@ namespace LiteCommerce.DataLayers
         /// Lấy Order
         /// </summary>
         /// <returns></returns>
-        Order Get(int orderID);
+        EntityOrder Get(int orderID);
         /// <summary>
         /// Thêm Order.Hàm trả về ID Order được bổ sung.
         /// Nếu lỗi ,hàm trả về giá trj nhỏ hơn hoặc bằng 0.
@@ -49,5 +49,8 @@ namespace LiteCommerce.DataLayers
         /// <returns></returns>
         int Delete(int[] orderIDs);
         List<OrderDetails> GetAll(int OrderID);
+        string CustomerNameToID(string CustomerName);
+        int EmployeeNametoID(string EmployeeName);
+        int ShipperNametoID(string ShipperName);
     }
 }

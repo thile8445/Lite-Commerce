@@ -1,0 +1,31 @@
+﻿@model LiteCommerce.DomainModels.Country
+@{
+
+}
+<div class="box box-primary">
+    <form role="form" method="post" action="~/Country/Input">
+        <div class="box-header text-right">
+            <a href="~/Country">Back to List</a>
+        </div>
+        <div class="box-body">
+            <input type="hidden" value="@Model.CountryID" name="CountryID" />
+            <div class="form-group">
+                <label>Company Name:@Html.ValidationMessage("CountryName", new { @style = "color:red" })</label>
+                <input type="text" class="form-control" placeholder="Enter CountryName " name="CountryName" value="@Model.CountryName">
+            </div>
+            <div class="form-group ">
+                    <label>Abbreviation:</label>               
+                    <input type="text" class="form-control" name="Abbreviation" value="@Model.Abbreviation">
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-sm btn-primary">
+                <i class="fa fa-save"></i> Save
+            </button>
+            <a class="btn btn-sm btn-default" href="~/Country">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>

@@ -44,6 +44,7 @@
     <Compile Include="CatalogBLL.cs" />
     <Compile Include="CountryBLL.cs" />
     <Compile Include="EmloyeeBLL.cs" />
+    <Compile Include="Mapper\OrderDetailsView.cs" />
     <Compile Include="OrderBLL.cs" />
     <Compile Include="ProductAttributeBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +61,7 @@
       <Name>LiteCommerce.DomainModels</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

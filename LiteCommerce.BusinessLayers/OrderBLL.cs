@@ -56,6 +56,22 @@ namespace LiteCommerce.BusinessLayers
         {
             return OrderDB.GetAll(OrderID);
         }
+        public static EntityOrder GetOrders(int OrderID)
+        {
+            return OrderDB.Get(OrderID);
+        }
+        public static int EmployeeNameToID(string EmployeeName)
+        {
+            return OrderBLL.EmployeeNameToID(EmployeeName);
+        }
+        public static int ShipperNameToID(string ShipperName)
+        {
+            return OrderBLL.ShipperNameToID(ShipperName);
+        }
+        public static string CustomerNameToID(string CustomerName)
+        {
+            return OrderBLL.CustomerNameToID(CustomerName);
+        }
         #endregion
     }
 }

@@ -1,72 +1,163 @@
-﻿@model LiteCommerce.DomainModels.EntityOrder
+﻿@model LiteCommerce.Admin.Models.OrderDetailsView
 @{
-    
+    int i = 0;
 }
 <div class="box box-primary">
     <form role="form" action="~/Order/Create" method="post">
-        <div class="box-header text-right">
-            <a href="~/Order">Back to List</a>
+        <div class="box-header row">
+            <div class="col-md-6 text-left h3">
+               <u>Orders</u> 
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="~/Order" class="text-right ">Back to List</a>
+            </div>
+           
         </div>
         <div class="box-body">
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label>Customer CompanyName: @Html.ValidationMessage("CustomerCompanyName", new { @style = "color: red" })</label>
-                    @Html.DropDownListFor(c =>c.CustomerCompanyName,
-                   SelectListHelper.Customers(),new { @class = "form-control"})
+                    @if (Model.Order.OrderID == 0)
+                    {
+                        @Html.DropDownListFor(c => c.Order.CustomerCompanyName,
+                        SelectListHelper.CustomersID(), new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(c => c.Order.CustomerCompanyName,
+                        SelectListHelper.CustomersName(), new { @class = "form-control" })
+                    }
+
                 </div>
                 <div class="col-sm-6">
                     <label>Shipper CompanyName:@Html.ValidationMessage("ShipperCompanyName", new { @style = "color: red" })</label>
-                    @Html.DropDownListFor(c => c.ShipperCompanyName,
-                   SelectListHelper.Shippers(), new { @class = "form-control" })
+                    @if (Model.Order.OrderID == 0)
+                    {
+                        @Html.DropDownListFor(c => c.Order.ShipperCompanyName,
+                        SelectListHelper.ShippersID(), new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(c => c.Order.ShipperCompanyName,
+                        SelectListHelper.ShippersName(), new { @class = "form-control" })
+                    }
                 </div>
             </div>
             <div class="form-group ">                          
                     <label>FullName Employee:@Html.ValidationMessage("FullName", new { @style = "color: red" })</label>
-                    @Html.DropDownListFor(c => c.FullName,
-                   SelectListHelper.Employees(), new { @class = "form-control" })
+                    @if (Model.Order.OrderID == 0)
+                    {
+                        @Html.DropDownListFor(c => c.Order.FullName,
+                        SelectListHelper.EmployeesID(), new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(c => c.Order.FullName,
+                        SelectListHelper.EmployeesName(), new { @class = "form-control" })
+                    }
             </div>
             <div class="form-group row">
                 <div class="col-sm-4">
                     <label>Order Date:@Html.ValidationMessage("OrderDate", new { @style = "color: red" })</label>
-                    <input type="datetime" class="form-control" value="@Model.OrderDate" name="OrderDate">
+                    <input type="datetime" class="form-control" value="@Model.Order.OrderDate" name="Order.OrderDate">
                 </div>
                 <div class="col-sm-4">
                     <label>Required Date:@Html.ValidationMessage("RequiredDate", new { @style = "color: red" })
                     @Html.ValidationMessage("Date", new { @style = "color: red" })
                     </label>
-                    <input type="datetime" class="form-control" value="@Model.RequiredDate" name="RequiredDate">
+                    <input type="datetime" class="form-control" value="@Model.Order.RequiredDate" name="Order.RequiredDate">
                 </div>
                 <div class="col-sm-4">
-                    <label>Shipper Date:@Html.ValidationMessage("ShippedDate", new { @style = "color: red" })</label>
-                    <input type="datetime" class="form-control" value="@Model.ShippedDate" name="ShippedDate">
+                    <label>Shipper Date:@Html.ValidationMessage("ShippedDate", new { @style = "color: red" })
+                    @Html.ValidationMessage("ShippedDate", new { @style = "color: red" })
+                    </label>
+                    <input type="datetime" class="form-control" value="@Model.Order.ShippedDate" name="Order.ShippedDate">
                 </div>
             </div>
             <div class="form-group">
                 <label>Address:@Html.ValidationMessage("ShipAddress", new { @style = "color: red" })</label>
-                <input type="text" class="form-control" placeholder="Address" value="@Model.ShipAddress" name="ShipAddress">
+                <input type="text" class="form-control" placeholder="Address" value="@Model.Order.ShipAddress" name="Order.ShipAddress">
             </div>
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label>Country:@Html.ValidationMessage("ShipCountry", new { @style = "color: red" })</label>
-                    @Html.DropDownListFor(c => c.ShipCountry,
+                    @Html.DropDownListFor(c => c.Order.ShipCountry,
                     SelectListHelper.Countries(),new { @class = "form-control" })
                 </div>
                 <div class="col-sm-6">
                     <label>City:@Html.ValidationMessage("ShipCity", new { @style = "color: red" })</label>
-                    <input type="text" class="form-control" placeholder="Ex: New Orleans" value="@Model.ShipCity" name="ShipCity">
+                    <input type="text" class="form-control" placeholder="Ex: New Orleans" value="@Model.Order.ShipCity" name="Order.ShipCity">
                 </div>
             </div>
             <div class="form-group ">
                 <label>Freight:@Html.ValidationMessage("Freight", new { @style = "color: red" })</label>
-                <input type="text" class="form-control" placeholder="Freight" value="@Model.Freight" name="Freight">
+                <input type="text" class="form-control" placeholder="Freight" value="@Model.Order.Freight" name="Order.Freight">
             </div>
-          
+          @if (Model.Order.OrderID != 0)
+          {
+              <h3>OrderDetails</h3>
+            <div class="box box-success">
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:30px">
+                                    <input type="checkbox" />
+                                </th>
+                                <th style="width:50px">#</th>
+                                <th style="width:auto">ProductName</th>
+                                <th style="width:auto">UnitPrice</th>
+                                <th style="width:auto">Quantity</th>
+                                <th style="width:auto">Discount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.OrderDetails)
+                {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td>@(++i)</td>
+                                    <td>
+
+                                        <span class="lc-company-name">
+                                            @order.ProductName
+                                        </span>
+
+                                    </td>
+                                    <td>
+
+                                        <span class="lc-company-name">
+                                            @order.UnitPrice
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="lc-contact-name">
+                                            @order.Quantity
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="lc-contact-name">
+                                            @order.Discount
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          }
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
+            @if(Model.Order.OrderID == 0)
+            {
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fa fa-save"></i> Save
             </button>
+            }
             <a class="btn btn-sm btn-default" href="~/Order">
                 Cancel
             </a>

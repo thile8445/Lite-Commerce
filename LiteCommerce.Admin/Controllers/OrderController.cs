@@ -36,62 +36,76 @@ namespace LiteCommerce.Admin.Controllers
             if (string.IsNullOrEmpty(id))
             {
                 ViewBag.Title = "Create a Order";
-                EntityOrder newOrder = new EntityOrder()
+                OrderDetailsView newOrder = new OrderDetailsView();
+                EntityOrder Order = new EntityOrder()
                 {
                     OrderID = 0
                 };
+                newOrder.Order = Order;
                 return View(newOrder);
             }
             else
             {
-                ViewBag.Title = "View Orders And OrderDetails";      
+                ViewBag.Title = "View Orders And OrderDetails";
+                OrderDetailsView viewOrder = new OrderDetailsView();
+                EntityOrder entityOrder = OrderBLL.GetOrders(Convert.ToInt32(id));
+                //entityOrder.CustomerCompanyName = OrderBLL.CustomerNameToID(entityOrder.CustomerCompanyName);
+                //entityOrder.ShipperCompanyName =Convert.ToString(OrderBLL.CustomerNameToID(entityOrder.ShipperCompanyName));
+                //entityOrder.FullName =Convert.ToString(OrderBLL.CustomerNameToID(entityOrder.FullName));
+                viewOrder.Order = entityOrder;
+                viewOrder.OrderDetails = OrderBLL.GetAllOrderDetails(Convert.ToInt32(id));
+                if (viewOrder == null)
+                    return RedirectToAction("Index");
+                return View(viewOrder);
+
             }
-            return View();
         }
         [HttpPost]
-        public ActionResult Create(EntityOrder model)
+        public ActionResult Create(OrderDetailsView model)
         {
             try
             {
 
-            if (string.IsNullOrEmpty(model.CustomerCompanyName))
+            if (string.IsNullOrEmpty(model.Order.CustomerCompanyName))
                 ModelState.AddModelError("CustomerCompanyName", "CustomerCompanyName expected");
-            if (string.IsNullOrEmpty(model.ShipperCompanyName))
+            if (string.IsNullOrEmpty(model.Order.ShipperCompanyName))
                 ModelState.AddModelError("ShipperCompanyName", "ShipperCompanyName expected");
-            if (string.IsNullOrEmpty(model.FullName))
+            if (string.IsNullOrEmpty(model.Order.FullName))
                 ModelState.AddModelError("FullName", "Employee expected");
-            if (string.IsNullOrEmpty(model.ShipAddress))
+            if (string.IsNullOrEmpty(model.Order.ShipAddress))
                 ModelState.AddModelError("ShipAddress", "ShipAddress expected");
-            if (string.IsNullOrEmpty(model.ShipCity))
+            if (string.IsNullOrEmpty(model.Order.ShipCity))
                 ModelState.AddModelError("ShipCity", "ShipCity expected");
-            if (string.IsNullOrEmpty(model.ShipCountry))
+            if (string.IsNullOrEmpty(model.Order.ShipCountry))
                 ModelState.AddModelError("ShipCountry", "ShipCountry expected");
-            if (model.Freight <= 0)
+            if (model.Order.Freight <= 0)
                 ModelState.AddModelError("Freight", "Freight expected");
-            if (model.OrderDate == DateTime.MinValue)
+            if (model.Order.OrderDate == DateTime.MinValue)
                 ModelState.AddModelError("OrderDate", "OrderDate expected");
-            if (model.RequiredDate == DateTime.MinValue)
+            if (model.Order.RequiredDate == DateTime.MinValue)
                 ModelState.AddModelError("RequiredDate", "RequiredDate expected");
-            if (model.ShippedDate == DateTime.MinValue)
+            if (model.Order.ShippedDate == DateTime.MinValue)
                 ModelState.AddModelError("ShippedDate", "ShippedDate expected");
-            if (Convert.ToDateTime(model.RequiredDate).CompareTo(Convert.ToDateTime(model.OrderDate)) <= 0)
+            if (Convert.ToDateTime(model.Order.RequiredDate).CompareTo(Convert.ToDateTime(model.Order.OrderDate)) <= 0)
                 ModelState.AddModelError("Date", "RequiredDate and OrderDate");
+            if (Convert.ToDateTime(model.Order.ShippedDate).CompareTo(Convert.ToDateTime(model.Order.OrderDate)) < 0)
+                ModelState.AddModelError("ShippedDate", "RequiredDate and OrderDate");
 
-            Order addOrder = new Order();
-            if(model.OrderID == 0)
+                Order addOrder = new Order();
+            if(model.Order.OrderID == 0)    
             {
-                    ViewBag.Title = "Create Order";
-                addOrder.OrderID = model.OrderID;
-                addOrder.EmployeeID =Convert.ToInt32(model.FullName);
-                addOrder.ShipperID = Convert.ToInt32(model.ShipperCompanyName);
-                addOrder.CustomerID = Convert.ToString(model.CustomerCompanyName);
-                addOrder.RequiredDate = Convert.ToDateTime(model.RequiredDate);
-                addOrder.OrderDate = Convert.ToDateTime(model.OrderDate);
-                addOrder.ShippedDate = Convert.ToDateTime(model.ShippedDate);
-                addOrder.ShipCity = Convert.ToString(model.ShipCity);
-                addOrder.ShipCountry = Convert.ToString(model.ShipCountry);
-                addOrder.ShipAddress = Convert.ToString(model.ShipAddress);
-                addOrder.Freight = Convert.ToDecimal(model.Freight);
+                ViewBag.Title = "Create Order";
+                addOrder.OrderID = model.Order.OrderID;
+                addOrder.EmployeeID = Convert.ToInt32(model.Order.FullName);
+                addOrder.ShipperID = Convert.ToInt32(model.Order.ShipperCompanyName);
+                addOrder.CustomerID = Convert.ToString(model.Order.CustomerCompanyName);
+                addOrder.RequiredDate = Convert.ToDateTime(model.Order.RequiredDate);
+                addOrder.OrderDate = Convert.ToDateTime(model.Order.OrderDate);
+                addOrder.ShippedDate = Convert.ToDateTime(model.Order.ShippedDate);
+                addOrder.ShipCity = Convert.ToString(model.Order.ShipCity);
+                addOrder.ShipCountry = Convert.ToString(model.Order.ShipCountry);
+                addOrder.ShipAddress = Convert.ToString(model.Order.ShipAddress);
+                addOrder.Freight = Convert.ToDecimal(model.Order.Freight);
                 OrderBLL.Add(addOrder);
             }
             return RedirectToAction("Index");
