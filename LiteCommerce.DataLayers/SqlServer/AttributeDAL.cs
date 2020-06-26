@@ -16,7 +16,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             this.connectionString = connectionString;
         }
 
-        List<DomainModels.Attribute> IAttributeDAL.getAll(int CategoryID)
+        List<DomainModels.Attribute> IAttributeDAL.GetAll(int CategoryID)
         {
             List<DomainModels.Attribute> data = new List<DomainModels.Attribute>();
             using (SqlConnection connection = new SqlConnection(connectionString))

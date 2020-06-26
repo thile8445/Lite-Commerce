@@ -16,9 +16,9 @@ namespace LiteCommerce.BusinessLayers
         {
             AttributeDB = new AttributeDAL(connectionString);
         }
-        public static List<DomainModels.Attribute> getAll(int CategoryID)
+        public static List<DomainModels.Attribute> GetAll(int CategoryID)
         {
-            return AttributeDB.getAll(CategoryID);
+            return AttributeDB.GetAll(CategoryID);
         }
     }
 }

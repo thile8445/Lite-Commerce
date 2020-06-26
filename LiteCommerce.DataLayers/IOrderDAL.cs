@@ -52,5 +52,6 @@ namespace LiteCommerce.DataLayers
         string CustomerNameToID(string CustomerName);
         int EmployeeNametoID(string EmployeeName);
         int ShipperNametoID(string ShipperName);
+        double Total(List<OrderDetails> list);
     }
 }

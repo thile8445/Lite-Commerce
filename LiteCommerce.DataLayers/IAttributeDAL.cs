@@ -8,6 +8,6 @@ namespace LiteCommerce.DataLayers
 {
     public interface IAttributeDAL
     {
-        List<DomainModels.Attribute> getAll(int CategoryID);
+        List<DomainModels.Attribute> GetAll(int CategoryID);
     }
 }

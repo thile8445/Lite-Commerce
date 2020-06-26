@@ -72,6 +72,10 @@ namespace LiteCommerce.BusinessLayers
         {
             return OrderBLL.CustomerNameToID(CustomerName);
         }
+        public static double Total(List<OrderDetails> list)
+        {
+            return OrderDB.Total(list);
+        }
         #endregion
     }
 }

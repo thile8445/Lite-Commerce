@@ -192,6 +192,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\sai.jpg" />
+    <Content Include="Images\simple.txt" />
     <Content Include="Images\uploads\sai.jpg" />
     <Content Include="Images\uploads\lich.png" />
     <Content Include="Images\uploads\unknown.jpg" />

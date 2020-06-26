@@ -64,7 +64,7 @@
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="~/Themes/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
-    
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
     <!-- Bootstrap 3.3.7 -->
     <script src="~/Themes/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- SlimScroll -->
@@ -78,7 +78,90 @@
     <script src="~/Themes/Js/SelectAllCheckbox.js"></script>
     <script>
   $(document).ready(function () {
-    $('.sidebar-menu').tree()
+      $('.sidebar-menu').tree();
+      // selected all shipper
+      $('#select-shipper').click(function (event) {
+          if (this.checked) {
+              // Iterate each checkbox
+              $("input[name = 'ShipperIDs']").each(function () {
+                  this.checked = true;
+              });
+          } else {
+              $("input[name = 'ShipperIDs']").each(function () {
+                  this.checked = false;
+              });
+          }
+      });
+      // selected all supplier
+      $('#select-supplier').click(function (event) {
+          if (this.checked) {
+              // Iterate each checkbox
+              $("input[name = 'supplierIDs']").each(function () {
+                  this.checked = true;
+              });
+          } else {
+              $("input[name = 'supplierIDs']").each(function () {
+                  this.checked = false;
+              });
+          }
+      });
+      // selected all customer
+      $('#select-customer').click(function (event) {
+          if (this.checked) {
+              // Iterate each checkbox
+              $("input[name = 'customerIDs']").each(function () {
+                  this.checked = true;
+              });
+          } else {
+              $("input[name = 'customerIDs']").each(function () {
+                  this.checked = false;
+              });
+          }
+      });
+
+      // selected all categories
+      $('#select-category').click(function (event) {
+          if (this.checked) {
+              // Iterate each checkbox
+              $("input[name = 'categoriesID']").each(function () {
+                  this.checked = true;
+              });
+          } else {
+              $("input[name = 'categoriesID']").each(function () {
+                  this.checked = false;
+              });
+          }
+      });
+      // selected all Product
+      $('#select-product').click(function (event) {
+          if (this.checked) {
+              // Iterate each checkbox
+              $("input[name = 'productIDs']").each(function () {
+                  this.checked = true;
+              });
+          } else {
+              $("input[name = 'productIDs']").each(function () {
+                  this.checked = false;
+              });
+          }
+      });
+      // selected all country
+      $('#select-country').click(function (event) {
+          if (this.checked) {
+              // Iterate each checkbox
+              $("input[name = 'countries']").each(function () {
+                  this.checked = true;
+              });
+          } else {
+              $("input[name = 'countries']").each(function () {
+                  this.checked = false;
+              });
+          }
+      });
+
+      $("#but").click(function () {
+          $("#report").load("Images/simple.txt");
+      });
   })
     </script>
 </body>

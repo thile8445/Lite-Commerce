@@ -1,6 +1,7 @@
 ﻿@model LiteCommerce.Admin.Models.OrderDetailsView
 @{
     int i = 0;
+   
 }
 <div class="box box-primary">
     <form role="form" action="~/Order/Create" method="post">
@@ -109,11 +110,12 @@
                                 <th style="width:auto">UnitPrice</th>
                                 <th style="width:auto">Quantity</th>
                                 <th style="width:auto">Discount</th>
+                                <th style="width:auto">Amount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var order in Model.OrderDetails)
-                {
+                            @foreach (var orderDetails in Model.OrderDetails)
+                            {
                                 <tr>
                                     <td>
                                         <input type="checkbox" />
@@ -122,24 +124,30 @@
                                     <td>
 
                                         <span class="lc-company-name">
-                                            @order.ProductName
+                                            @orderDetails.ProductName
                                         </span>
 
                                     </td>
                                     <td>
 
-                                        <span class="lc-company-name">
-                                            @order.UnitPrice
+                                        <span class="lc-contact-name">
+                                            @orderDetails.UnitPrice
                                         </span>
                                     </td>
                                     <td>
                                         <span class="lc-contact-name">
-                                            @order.Quantity
+                                            @orderDetails.Quantity
                                         </span>
                                     </td>
                                     <td>
                                         <span class="lc-contact-name">
-                                            @order.Discount
+                                            @orderDetails.Discount
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="lc-contact-name">
+                                         @orderDetails.Amount
+                                           
                                         </span>
                                     </td>
                                 </tr>
@@ -147,6 +155,9 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="lc-contact-name text-right h3">
+                Total : @ViewBag.Total 
             </div>
           }
         </div>

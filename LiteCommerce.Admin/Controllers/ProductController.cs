@@ -115,12 +115,12 @@ namespace LiteCommerce.Admin.Controllers
         /// <param name="ProductIDs"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Delete(int[] ProductIDs)
+        public ActionResult Delete(int[] productIDs)
         {
-            if (ProductIDs != null)
+            if (productIDs != null)
             {
-                ProductAttributeBLL.Delete(ProductIDs);
-                CatalogBLL.DeleteProducts(ProductIDs);
+                ProductAttributeBLL.Delete(productIDs);
+                CatalogBLL.DeleteProducts(productIDs);
                 
 
             }
@@ -132,10 +132,10 @@ namespace LiteCommerce.Admin.Controllers
         {
             /// Danh sach name attribute
             List<DomainModels.Attribute> getAttribute = new List<DomainModels.Attribute>();
-            getAttribute = AttributeBLL.getAll(Convert.ToInt32(CategoryID));
+            getAttribute = AttributeBLL.GetAll(Convert.ToInt32(CategoryID));
 
             // Lấy danh sách tất cả các Attribute theo ProductID
-            List<ProductAttributes> getAll = ProductAttributeBLL.getAll(Convert.ToInt32(ProductID));
+            List<ProductAttributes> getAll = ProductAttributeBLL.GetAll(Convert.ToInt32(ProductID));
             if (Type.Equals("Update"))
             {           
                 if(getAll.Count == 0)

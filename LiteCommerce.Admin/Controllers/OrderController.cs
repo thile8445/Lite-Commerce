@@ -49,11 +49,10 @@ namespace LiteCommerce.Admin.Controllers
                 ViewBag.Title = "View Orders And OrderDetails";
                 OrderDetailsView viewOrder = new OrderDetailsView();
                 EntityOrder entityOrder = OrderBLL.GetOrders(Convert.ToInt32(id));
-                //entityOrder.CustomerCompanyName = OrderBLL.CustomerNameToID(entityOrder.CustomerCompanyName);
-                //entityOrder.ShipperCompanyName =Convert.ToString(OrderBLL.CustomerNameToID(entityOrder.ShipperCompanyName));
-                //entityOrder.FullName =Convert.ToString(OrderBLL.CustomerNameToID(entityOrder.FullName));
                 viewOrder.Order = entityOrder;
                 viewOrder.OrderDetails = OrderBLL.GetAllOrderDetails(Convert.ToInt32(id));
+                double total = OrderBLL.Total(viewOrder.OrderDetails);
+                ViewBag.Total = total.ToString();
                 if (viewOrder == null)
                     return RedirectToAction("Index");
                 return View(viewOrder);

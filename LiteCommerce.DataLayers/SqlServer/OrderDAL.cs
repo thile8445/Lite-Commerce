@@ -97,7 +97,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             return count;
         }
 
-        public string CustomerNameToID(string CustomerName)
+        public string CustomerNameToID(string customerName)
         {
             string CustomerID = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -108,7 +108,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                 cmd.CommandText = @"select CustomerID from Customers where CompanyName = @CompanyName ";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@CompanyName", CustomerName);
+                cmd.Parameters.AddWithValue("@CompanyName", customerName);
                 CustomerID = Convert.ToString(cmd.ExecuteScalar());
 
                 connection.Close();
@@ -121,10 +121,10 @@ namespace LiteCommerce.DataLayers.SqlServer
             throw new NotImplementedException();
         }
 
-        public int EmployeeNametoID(string EmployeeName)
+        public int EmployeeNametoID(string employeeName)
         {
             int EmployeeID = 0;
-            string[] Name = EmployeeName.Split(' ');
+            string[] Name = employeeName.Split(' ');
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -212,7 +212,7 @@ namespace LiteCommerce.DataLayers.SqlServer
                         {
                             OrderID = Convert.ToInt32(reader["OrderID"]),
                             ProductID = Convert.ToInt32(reader["ProductID"]),
-                            UnitPrice = Convert.ToDecimal(reader["UnitPrice"]),
+                            UnitPrice = Convert.ToDouble(reader["UnitPrice"]),
                             Discount = Convert.ToDouble(reader["Discount"]),
                             Quantity = Convert.ToInt32(reader["Quantity"]),
                             ProductName = Convert.ToString(reader["ProductName"])
@@ -297,6 +297,16 @@ namespace LiteCommerce.DataLayers.SqlServer
                 connection.Close();
             }
             return ShipperID;
+        }
+
+        public double Total(List<OrderDetails> list)
+        {
+            double total = 0;
+            foreach (var amount in list)
+            {
+                total += amount.Amount;
+            }
+            return total;
         }
 
         public bool Update(Order data)

@@ -126,7 +126,7 @@ namespace LiteCommerce.DataLayers.SqlServer
             return countDelete;
         }
 
-        public List<ProductAttributes> getAll(int productID)
+        public List<ProductAttributes> GetAll(int productID)
         {
             List<ProductAttributes> data = new List<ProductAttributes>();
             using (SqlConnection connection = new SqlConnection(connectionString))

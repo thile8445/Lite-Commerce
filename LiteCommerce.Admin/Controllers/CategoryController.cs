@@ -84,11 +84,11 @@ namespace LiteCommerce.Admin.Controllers
         /// <param name="CategoriesID"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Delete(int[] CategoriesID)
+        public ActionResult Delete(int[] categoriesID)
         {
-            if (CategoriesID != null)
+            if (categoriesID != null)
             {
-                CatalogBLL.DeleteCategories(CategoriesID);
+                CatalogBLL.DeleteCategories(categoriesID);
 
             }
             return RedirectToAction("Index");

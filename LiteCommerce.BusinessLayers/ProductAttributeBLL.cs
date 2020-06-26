@@ -16,9 +16,9 @@ namespace LiteCommerce.BusinessLayers
         {
             ProductAttributeDB = new ProductAttributeDAL(connectionString);
         }
-        public static List<ProductAttributes> getAll(int productID)
+        public static List<ProductAttributes> GetAll(int productID)
         {
-            return ProductAttributeDB.getAll(productID);
+            return ProductAttributeDB.GetAll(productID);
         }
         public static int Add(List<ProductAttributes> ProductAttributes)
         {

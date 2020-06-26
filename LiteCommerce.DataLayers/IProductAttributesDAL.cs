@@ -9,7 +9,7 @@ namespace LiteCommerce.DataLayers
 {
     public interface IProductAttributesDAL
     {
-        List<ProductAttributes> getAll(int productID);
+        List<ProductAttributes> GetAll(int productID);
         int Delete(int[] ProductIDs);
         int Update(List<ProductAttributes> data);
         int Add(List<ProductAttributes> data);
