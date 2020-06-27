@@ -88,6 +88,14 @@ namespace LiteCommerce.BusinessLayers
         {
             return EmployeeDB.GetAll();
         }
+        public static int CountRoles(List<Employee> list,string type)
+        {
+            return EmployeeDB.CountRoles(list, type);
+        }
+        public static int CountAll()
+        {
+            return EmployeeDB.CountAll();
+        }
         #endregion
     }
 }

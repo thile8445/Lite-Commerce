@@ -111,6 +111,23 @@ namespace LiteCommerce.DataLayers.SqlServer
             }
             return count;
         }
+
+        public int CountAll()
+        {
+            int count = 0;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"select count(*) as count from Suppliers ";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                count = Convert.ToInt32(cmd.ExecuteScalar());
+                connection.Close();
+            }
+            return count;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -321,6 +338,7 @@ namespace LiteCommerce.DataLayers.SqlServer
 
             return rowsAffected > 0;
         }
+       
         
     }
 }

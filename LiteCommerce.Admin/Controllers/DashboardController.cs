@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiteCommerce.Admin.Models.Dashboard;
+using LiteCommerce.BusinessLayers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,12 +12,17 @@ namespace LiteCommerce.Admin.Controllers
     public class DashboardController : Controller
     {
 
-        // GET: Dashboard
-        
         public ActionResult Index()
         {
-            //return RedirectToAction("~/Account/SignIn");
-            return View();
+            DashboardResult dashboard = new DashboardResult();
+            dashboard.countEmployees = EmloyeeBLL.CountAll();
+            dashboard.countCategories = CatalogBLL.CountAllCategories();
+            dashboard.countCustomers = CatalogBLL.CountAllCustomers();
+            dashboard.countOrders = OrderBLL.CountAll();
+            dashboard.countProducts = CatalogBLL.CountAllProducts();
+            dashboard.countShippers = CatalogBLL.CountAllShippers();
+            dashboard.countSuppliers = CatalogBLL.CountAllSuppliers();
+            return View(dashboard);
         }
     }
 }

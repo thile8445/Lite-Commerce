@@ -49,5 +49,6 @@ namespace LiteCommerce.DataLayers
         /// <returns></returns>
         int Delete(int[] shipperIDs);
         List<Shipper> GetAll();
+        int CountAll();
     }
 }

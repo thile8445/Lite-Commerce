@@ -40,8 +40,9 @@
                         <th style="width:50px">#</th>
                         <th style="width:auto">Name</th>
                         <th style="width:200px">Date</th>
-                        <th style="width:200px">Address</th>
+                        <th style="width:120px">Address</th>
                         <th style="width:200px">Contact Info</th>
+                        <th style="width:120px">Roles</th>
                         <th style="width:120px">Photo </th>
                         <th style="width:80px"></th>
                     </tr>
@@ -73,6 +74,10 @@
                             <td>
                                 <p style="display:block"><i class="fa fa-envelope"></i> @employee.Email</p>
                                 <p style="display:block"><i class="fa fa-home"></i> @employee.HomePhone</p>
+                            </td>
+                            <td>
+                                <p style="display:block">@employee.Roles</p>
+                                
                             </td>
                             <td>
                                 <img src="~/Images/uploads/@employee.PhotoPath" class="img-responsive" />

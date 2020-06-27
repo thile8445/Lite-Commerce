@@ -72,6 +72,22 @@ namespace LiteCommerce.DataLayers.SqlServer
             return count;
         }
 
+        public int CountAll()
+        {
+            int count = 0;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"select count(*) as count from Categories ";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                count = Convert.ToInt32(cmd.ExecuteScalar());
+                connection.Close();
+            }
+            return count;
+        }
+
         public int Delete(int[] categoryIDs)
         {
             int countDeleted = 0;

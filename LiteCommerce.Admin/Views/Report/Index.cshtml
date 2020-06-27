@@ -1,6 +1,115 @@
-﻿@{
-    ViewBag.Title = "Manage Report";
+﻿@model LiteCommerce.Admin.Models.Report.ReportResult
+@{
+    ViewBag.Title = "Report Manager";
+    int i = 0;
 }
-<div id="report"><h2>Let jQuery AJAX Change This Text</h2></div>
+@*<div id="report"><h2>Let jQuery AJAX Change This Text</h2></div>
 
-<button id="but">Get External Content</button>
+<button id="but">Get External Content</button>*@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <form action="~/Country/Delete" method="post">
+                <div class="lc-margin-bottom">
+                    <div class="row">
+                        <div class="col-lg-4 ">
+                            <a href="~/Report/Index?type=staff">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-aqua"><i class="ion ion-person-add"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Staff</span>
+                                        <span class="info-box-number">@ViewBag.countStaff</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                            </a>
+                            <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-lg-4">
+                            <a href="~/Report/Index?type=manageaccount">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-red"><i class="ion ion-person-add"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Manager Account</span>
+                                        <span class="info-box-number">@ViewBag.countManageAccount</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                            </a>
+                                <!-- /.info-box -->
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="~/Report/Index?type=managedata">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-yellow"><i class="ion ion-person-add"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Manager Data</span>
+                                        <span class="info-box-number">@ViewBag.countManageData</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-success">
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                   
+                                    <th style="width:50px">#</th>
+                                    <th style="width:auto">Staff</th>
+                                    <th style="width:auto">Manager Account</th>
+                                    <th style="width:auto">Manager Data</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var role in Model.listEmployee)
+                            {
+                                <tr>
+                                   
+                                    <td>@(++i)</td>
+                                    <td>
+                                       
+                                            @if (role.Roles.Contains("staff"))
+                                            {
+                                                <span class="lc-company-name">
+                                                    @role.FirstName &ensp;@role.LastName
+                                                </span>
+                                            }
+                                    </td>
+                                    <td>
+                                        @if (role.Roles.Contains("manageaccount"))
+                                        {
+                                            <span class="lc-company-name">
+                                                @role.FirstName &ensp;@role.LastName
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (role.Roles.Contains("managedata"))
+                                        {
+                                            <span class="lc-company-name">
+                                                @role.FirstName &ensp;@role.LastName
+                                            </span>
+                                        }
+                                    </td>
+                                    
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</div>

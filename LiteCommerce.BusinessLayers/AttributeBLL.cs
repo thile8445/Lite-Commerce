@@ -20,5 +20,9 @@ namespace LiteCommerce.BusinessLayers
         {
             return AttributeDB.GetAll(CategoryID);
         }
+        public static int Add(DomainModels.Attribute data)
+        {
+            return AttributeDB.Add(data);
+        }
     }
 }

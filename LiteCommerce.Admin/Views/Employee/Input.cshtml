@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-sm-2">
                    @if (Model.EmployeeID != 0)
-                    {
+                   {
                     <div class="form-group">
                         <label>Image:</label>
                         <div class="input-group" style="width:auto ; height:auto ;">
@@ -38,22 +38,22 @@
                         </div>
                     </div>
                    }
-                    else if (Model.EmployeeID == 0)
-                    {
+                   else if (Model.EmployeeID == 0)
+                   {
                         <div class="form-group">
                             <label>Image:</label>
                             <div class="input-group" style="width:auto ; height:auto ;">
                                 <img src="~/Images/uploads/unknown.jpg" class="img-responsive " />
                             </div>
                         </div>
-                    }
+                   }
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label>Country:</label>
                     @Html.DropDownListFor(m => m.Country,
-                      SelectListHelper.Countries(), new { @class = "form-control" })
+       SelectListHelper.Countries(), new { @class = "form-control" })
                 </div>
                 <div class="col-sm-6">
                     <label>City:</label>
@@ -92,6 +92,38 @@
                 </div>
             </div>
             <div class="form-group">
+                <label>Select Rolse:</label>
+                <div class="input-group">
+                    @if (Model.Roles.Split(',').Contains("staff"))
+                    {
+                        <input type="checkbox" id="staff" name="staff" value="staff" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="staff" name="staff" value="staff" >
+                    }
+                    <label for="staff">Staff</label><br>
+                    @if (Model.Roles.Split(',').Contains("manageaccount"))
+                    {
+                        <input type="checkbox" id="manageaccount" name="manageaccount" value="manageaccount" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="manageaccount" name="manageaccount" value="manageaccount">
+                    }
+                    <label for="manageaccount">Manage Account</label><br>
+                    @if (Model.Roles.Split(',').Contains("managedata"))
+                    {
+                        <input type="checkbox" id="managedata" name="managedata" value="managedata" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="managedata" name="managedata" value="managedata">
+                    }
+                    <label for="managedata"> Manage Data</label>
+                </div>
+            </div>
+            <div class="form-group">
                 <label>PhotoPath:</label>
                 <div class="input-group">
                     <div class="input-group-addon">
@@ -107,8 +139,6 @@
                     <label>Notes:</label>
                     <input type="text" class="form-control" placeholder="notes" value="@Model.Notes" name="Notes">
                 </div>
-                
-                    
                     @if (Model.EmployeeID == 0)
                     {
                         <div class="col-sm-6">
@@ -119,10 +149,7 @@
                     }
                 @if (Model.EmployeeID != 0)
                 {
-                   
                         <input type="hidden" class="form-control" placeholder="Password" value="@Model.Password" name="Password">
-
-                  
                 }
 
             </div>

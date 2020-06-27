@@ -1,0 +1,45 @@
+﻿@model List<LiteCommerce.DomainModels.Attribute>
+@{
+    ViewBag.Title = "Attributes Category";
+}
+<div class="box box-primary">
+   
+        <div class="box-header text-right">
+            <a href="~/Category">Back to List</a>
+        </div>
+        <div class="box-body">
+            <label>Add Attribute:</label>
+            <form method="post" action="~/Category/AddAttributes">
+                <div class="input-group ">
+                    <input type="hidden" name="CategoryID" value="@ViewBag.CategoryID" class="form-control">
+                    <input type="text" name="AttributeName" class="form-control">
+                    <span class="input-group-btn">
+                        <button type="submit" name="Attrbu"  class="btn btn-info btn-flat">Add</button>
+                    </span>
+                </div>
+            </form>
+            <h3>List Attributes:</h3>
+            @foreach (var attri in Model)
+            {
+                <div class="form-group">
+                    
+                    <input type="text" class="form-control" placeholder="Enter Description" name="Description" value="@attri.AttributeName">
+                </div>
+            }
+           
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-sm btn-primary">
+                <i class="fa fa-save"></i> Save
+            </button>
+            <a class="btn btn-sm btn-default" href="~/Category/Attributes">
+                Attributes
+            </a>
+            <a class="btn btn-sm btn-default" href="~/Category">
+                Cancel
+            </a>
+        </div>
+
+</div>
+

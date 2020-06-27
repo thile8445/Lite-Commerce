@@ -76,6 +76,10 @@ namespace LiteCommerce.BusinessLayers
         {
             return OrderDB.Total(list);
         }
+        public static int CountAll()
+        {
+            return OrderDB.CountAll();
+        }
         #endregion
     }
 }

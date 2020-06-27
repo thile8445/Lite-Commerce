@@ -50,6 +50,23 @@ namespace LiteCommerce.Admin.Controllers
             }
            
         }
+        [HttpGet]
+        public ActionResult Attributes(string CategoryID="")
+        {
+            List<DomainModels.Attribute> list = AttributeBLL.GetAll(Convert.ToInt32(CategoryID));
+            ViewBag.CategoryID = CategoryID;
+            return View(list);
+        }
+        [HttpPost]
+        public ActionResult AddAttributes(string CategoryID, string AttributeName="")
+        {
+            AttributeBLL.Add(new DomainModels.Attribute()
+            {
+                AttributeName = AttributeName,
+                CategoryID = Convert.ToInt32(CategoryID)
+            });
+            return RedirectToAction("Attributes",new { CategoryID = CategoryID } );
+        }
         [HttpPost]
         public ActionResult Input(Category model)
         {

@@ -1,7 +1,106 @@
-﻿
+﻿@model LiteCommerce.Admin.Models.Dashboard.DashboardResult
 @{
-    ViewBag.Title = "Index";
-    ViewBag.SmallTitle = "Important things!";
+    ViewBag.Title = "Dashboard";
+    ViewBag.SmallTitle = "Control panel!";
 }
+<div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>@Model.countCategories</h3>
+                <p>Categories</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
 
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>@Model.countCustomers</h3>
+                <p>Customers</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>@Model.countEmployees</h3>
+                <p>Employees</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-people-outline"></i>
+            </div>
+            
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>@Model.countSuppliers</h3>
+                <p>Suppliers</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="ion ion-ios-pricetag-outline"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Product</span>
+                <span class="info-box-number">@Model.countProducts</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+   
+   
+    <!-- /.col -->
+   
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Orders</span>
+                <span class="info-box-number">@Model.countOrders</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-person-add"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Shippers</span>
+                <span class="info-box-number">@Model.countShippers</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
 

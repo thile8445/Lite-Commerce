@@ -16,6 +16,77 @@ namespace LiteCommerce.DataLayers.SqlServer
             this.connectionString = connectionString;
         }
 
+        public int Add(DomainModels.Attribute data)
+        {
+            int attributeID = 0;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"INSERT INTO Attributes
+                                          (
+	                                          AttributeName,CategoryID
+                                          )
+                                          VALUES
+                                          (
+	                                          @AttributeName,@CategoryID
+                                          );
+                                          SELECT @@IDENTITY;";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@AttributeName", data.AttributeName);
+                cmd.Parameters.AddWithValue("@CategoryID", data.CategoryID);
+                attributeID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                connection.Close();
+            }
+
+            return attributeID;
+        }
+
+        public bool Delete(int AttributeID)
+        {
+            int rowsAffected = 0;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"DELETE FROM Attributes
+                                            WHERE AttributeID = @AttributeID";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@AttributeID", AttributeID);
+                rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
+                connection.Close();
+            }
+
+            return rowsAffected > 0;
+        }
+
+        public bool Update(DomainModels.Attribute data)
+        {
+            int rowsAffected = 0;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"UPDATE Attributes
+                                           SET AttributeName = @AttributeName     
+                                          WHERE AttributeID = @AttributeID";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@AttributeName", data.AttributeName);
+                cmd.Parameters.AddWithValue("@AttributeID", data.AttributeID);
+                rowsAffected = Convert.ToInt32(cmd.ExecuteNonQuery());
+
+                connection.Close();
+            }
+
+            return rowsAffected > 0;
+        }
+
         List<DomainModels.Attribute> IAttributeDAL.GetAll(int CategoryID)
         {
             List<DomainModels.Attribute> data = new List<DomainModels.Attribute>();

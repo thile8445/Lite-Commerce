@@ -173,6 +173,7 @@
     <Compile Include="Models\CategoryPaginationResult.cs" />
     <Compile Include="Models\CountryPaginationResult.cs" />
     <Compile Include="Models\CustomerPaginationResult.cs" />
+    <Compile Include="Models\Dashboard\DashboardResult.cs" />
     <Compile Include="Models\EmployeePaginationResult.cs" />
     <Compile Include="Models\OrderDetailsView.cs" />
     <Compile Include="Models\OrderPaginationResult.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Models\Password\EmployeePassword.cs" />
     <Compile Include="Models\Password\Password.cs" />
     <Compile Include="Models\ProductPaginationResult.cs" />
+    <Compile Include="Models\Report\ReportResult.cs" />
     <Compile Include="Models\ShipperPaginationResult.cs" />
     <Compile Include="Models\SupplierPaginationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -7464,6 +7466,7 @@
     <Content Include="Views\Product\UpdateAttribute.cshtml" />
     <Content Include="Views\Country\Index.cshtml" />
     <Content Include="Views\Country\Input.cshtml" />
+    <Content Include="Views\Category\Attributes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

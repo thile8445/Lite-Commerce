@@ -53,5 +53,6 @@ namespace LiteCommerce.DataLayers
         /// </summary>
         /// <returns></returns>
         List<Category> GetAll();
+        int CountAll();
     }
 }

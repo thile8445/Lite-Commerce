@@ -1,6 +1,6 @@
 ﻿@model LiteCommerce.DomainModels.Employee
 @{
-
+    ViewBag.Title = "Profile";
 }
 <div class="box box-primary">
     <form role="form" action="~/Account/SaveProfile" method="post" enctype="multipart/form-data">
@@ -98,24 +98,11 @@
                         <label>Notes:</label>
                         <input type="text" class="form-control" placeholder="notes" value="@Model.Notes" name="Notes">
                     </div>
-
-
-                    @if (Model.EmployeeID == 0)
-                    {
-                        <div class="col-sm-6">
-                            <label>Password:@Html.ValidationMessage("Password", new { @style = "color: red" })</label>
-                            <input type="password" class="form-control" placeholder="Password" value="@Model.Password" name="Password">
-
-                        </div>
-                    }
-                    @if (Model.EmployeeID != 0)
-                    {
-
-                        <input type="hidden" class="form-control" placeholder="Password" value="@Model.Password" name="Password">
-
-
-                    }
-
+                    <div class="col-sm-6">
+                        <label>Rolse:</label>
+                        <input type="text" class="form-control" readonly value="@Model.Roles" name="Roles">
+                    </div>
+                    <input type="hidden" class="form-control" placeholder="Password" value="@Model.Password" name="Password">
                 </div>
             </div>
         <!-- /.box-body -->

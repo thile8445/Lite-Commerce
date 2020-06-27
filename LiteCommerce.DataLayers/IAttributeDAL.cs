@@ -9,5 +9,8 @@ namespace LiteCommerce.DataLayers
     public interface IAttributeDAL
     {
         List<DomainModels.Attribute> GetAll(int CategoryID);
+        int Add(DomainModels.Attribute data);
+        bool Delete(int AttributeID);
+        bool Update(DomainModels.Attribute data);
     }
 }

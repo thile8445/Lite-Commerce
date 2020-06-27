@@ -54,7 +54,7 @@ namespace LiteCommerce.Admin.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Input(Employee model, HttpPostedFileBase PhotoPath,string PhotoPathDraft)
+        public ActionResult Input(Employee model, HttpPostedFileBase PhotoPath,string PhotoPathDraft,string staff="",string manageaccount="",string managedata="")
         {
             try
             {
@@ -94,6 +94,45 @@ namespace LiteCommerce.Admin.Controllers
                     string path = Path.Combine(Server.MapPath("~/Images/uploads"), FileName);
                     PhotoPath.SaveAs(path);
                     model.PhotoPath = FileName;
+                }
+                if (string.IsNullOrEmpty(staff))
+                {
+                   
+                    if (string.IsNullOrEmpty(manageaccount) && string.IsNullOrEmpty(managedata))
+                    {
+                        model.Roles = "";
+                    }
+                    else if (string.IsNullOrEmpty(managedata))
+                    {
+                        model.Roles = manageaccount;
+                    }
+                    else if (string.IsNullOrEmpty(manageaccount))
+                    {
+                        model.Roles = managedata;
+                    }
+                    else
+                    {
+                        model.Roles = manageaccount + "," + managedata;
+                    }
+                }
+                else 
+                {
+                    if (string.IsNullOrEmpty(manageaccount) && string.IsNullOrEmpty(managedata))
+                    {
+                        model.Roles = staff;
+                    }
+                    else if (string.IsNullOrEmpty(managedata))
+                    {
+                        model.Roles =staff+","+ manageaccount;
+                    }
+                    else if (string.IsNullOrEmpty(manageaccount))
+                    {
+                        model.Roles = staff + "," + managedata;
+                    }
+                    else
+                    {
+                        model.Roles = staff + "," + manageaccount + "," + managedata;
+                    }
                 }
                 //TODO :Lưu dữ liệu nhập vào
                 if (model.EmployeeID == 0)

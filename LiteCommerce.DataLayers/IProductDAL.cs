@@ -48,5 +48,6 @@ namespace LiteCommerce.DataLayers
         /// <param name="productIDs"></param>
         /// <returns></returns>
         int Delete(int[] productIDs);
+        int CountAll();
     }
 }

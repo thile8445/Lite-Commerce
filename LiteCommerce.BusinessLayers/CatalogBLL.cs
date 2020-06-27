@@ -303,7 +303,26 @@ namespace LiteCommerce.BusinessLayers
         {
             return ProductDB.Update(data);
         }
-
+        public static int CountAllShippers()
+        {
+            return ShipperDB.CountAll();
+        }
+        public static int CountAllSuppliers()
+        {
+            return SupplierDB.CountAll();
+        }
+        public static int CountAllCategories()
+        {
+            return CategoryDB.CountAll();
+        }
+        public static int CountAllProducts()
+        {
+            return ProductDB.CountAll();
+        }
+        public static int CountAllCustomers()
+        {
+            return CustomerDB.CountAll();
+        }
         #endregion
     }
 
