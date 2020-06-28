@@ -29,7 +29,7 @@ namespace LiteCommerce.Admin.Controllers
         {
             try
             {
-                //TODO :Kiểm tra tính hợp lệ của dữ liệu nhập vào
+                
                 if (string.IsNullOrEmpty(model.FirstName))
                     ModelState.AddModelError("FirstName", "FirstName expected");
                 if (string.IsNullOrEmpty(model.LastName))
@@ -58,7 +58,7 @@ namespace LiteCommerce.Admin.Controllers
                     model.Notes = "";
                 if (string.IsNullOrEmpty(model.PhotoPath))
                     model.PhotoPath = "";
-                //TODO :upload image
+               
                 if (PhotoPath != null)
                 {
                     string FileName = $"{DateTime.Now.Ticks}{Path.GetExtension(PhotoPath.FileName)}";
@@ -66,7 +66,7 @@ namespace LiteCommerce.Admin.Controllers
                     PhotoPath.SaveAs(path);
                     model.PhotoPath = FileName;
                 }
-                //TODO :Lưu dữ liệu nhập vào            
+                 
                 if (string.IsNullOrEmpty(model.PhotoPath))
                 {
                     model.PhotoPath = PhotoPathDraft;

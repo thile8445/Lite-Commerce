@@ -67,12 +67,18 @@ namespace LiteCommerce.Admin.Controllers
                     ModelState.AddModelError("Title", "Title expected");
                 if (string.IsNullOrEmpty(model.Password))
                     ModelState.AddModelError("Password", "Password expected");
-                if(model.BirthDate == DateTime.MinValue)
+                if (string.IsNullOrEmpty(model.PhotoPath))
+                    ModelState.AddModelError("PhotoPath", "PhotoPath expected");
+                if (string.IsNullOrEmpty(model.Email))
+                    ModelState.AddModelError("Email", "Email expected");
+                if (model.BirthDate == DateTime.MinValue)
                     ModelState.AddModelError("BirthDate", "BirthDate expected");
                 if (model.HireDate == DateTime.MinValue)
                     ModelState.AddModelError("HireDate", "HireDate expected");
                 if (Convert.ToDateTime(model.HireDate).CompareTo(Convert.ToDateTime(model.BirthDate)) <= 0)
                     ModelState.AddModelError("Date", "Date expected");
+                if (string.IsNullOrEmpty(staff) && string.IsNullOrEmpty(manageaccount) && string.IsNullOrEmpty(managedata))
+                    ModelState.AddModelError("Roles", "Roles expected");
                 if (string.IsNullOrEmpty(model.Email))
                     model.Email = "";
                 if (string.IsNullOrEmpty(model.Address))
@@ -134,9 +140,10 @@ namespace LiteCommerce.Admin.Controllers
                         model.Roles = staff + "," + manageaccount + "," + managedata;
                     }
                 }
-                //TODO :Lưu dữ liệu nhập vào
+                
                 if (model.EmployeeID == 0)
                 {
+                    model.Password = EncodeMD5.EnCodeMD5(model.Password);
                     EmloyeeBLL.AddEmployee(model);
                 }
                 else

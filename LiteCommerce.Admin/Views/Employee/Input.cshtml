@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label>Email:</label>
+                    <label>Email: @Html.ValidationMessage("Email", new { @style = "color: red" })</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-envelope-o"></i>
@@ -92,39 +92,62 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>Select Rolse:</label>
+                <label>Select Roles: @Html.ValidationMessage("Roles", new { @style = "color: red" })</label>
                 <div class="input-group">
-                    @if (Model.Roles.Split(',').Contains("staff"))
+                    @if (Model.EmployeeID != 0)
                     {
-                        <input type="checkbox" id="staff" name="staff" value="staff" checked>
+
+                        if (Model.Roles.Split(',').Contains("staff"))
+                        {
+                            <input type="checkbox" id="staff" name="staff" value="staff" checked>
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="staff" name="staff" value="staff">
+                        }
                     }
                     else
                     {
-                        <input type="checkbox" id="staff" name="staff" value="staff" >
+                            <input type="checkbox" id="staff" name="staff" value="staff" >
                     }
-                    <label for="staff">Staff</label><br>
-                    @if (Model.Roles.Split(',').Contains("manageaccount"))
+                        <label for="staff">Staff</label><br>
+                    @if (Model.EmployeeID != 0)
                     {
-                        <input type="checkbox" id="manageaccount" name="manageaccount" value="manageaccount" checked>
+                        if (Model.Roles.Split(',').Contains("manageaccount"))
+                        {
+                            <input type="checkbox" id="manageaccount" name="manageaccount" value="manageaccount" checked>
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="manageaccount" name="manageaccount" value="manageaccount">
+                        }
                     }
                     else
                     {
-                        <input type="checkbox" id="manageaccount" name="manageaccount" value="manageaccount">
+                            <input type="checkbox" id="manageaccount" name="manageaccount" value="manageaccount">
                     }
-                    <label for="manageaccount">Manage Account</label><br>
-                    @if (Model.Roles.Split(',').Contains("managedata"))
+                        <label for="manageaccount">Manage Account</label><br>
+                    @if (Model.EmployeeID != 0)
                     {
-                        <input type="checkbox" id="managedata" name="managedata" value="managedata" checked>
+                        if (Model.Roles.Split(',').Contains("managedata"))
+                        {
+                            <input type="checkbox" id="managedata" name="managedata" value="managedata" checked>
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="managedata" name="managedata" value="managedata">
+                        }
                     }
                     else
                     {
-                        <input type="checkbox" id="managedata" name="managedata" value="managedata">
+                           <input type="checkbox" id="managedata" name="managedata" value="managedata">
                     }
+
                     <label for="managedata"> Manage Data</label>
                 </div>
             </div>
             <div class="form-group">
-                <label>PhotoPath:</label>
+                <label>PhotoPath: :@Html.ValidationMessage("PhotoPath", new { @style = "color: red" })</label>
                 <div class="input-group">
                     <div class="input-group-addon">
                         <i class="fa fa-link"></i>

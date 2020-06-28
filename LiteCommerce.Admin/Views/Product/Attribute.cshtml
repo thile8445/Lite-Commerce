@@ -40,17 +40,17 @@
                                 <td>
                                     <input type="hidden" name="Type" value="@Type" />
                                     <input type="hidden" name="ProductID" value="@ViewBag.ProductID" />
+                                    <input type="hidden" name="AttributeID" value="@attribute.AttributeID" />
+                                    <input type="hidden" name="ProductIDs" value="@attribute.ProductID" />
+                                    <input type="hidden" name="AttributeNames" value="@attribute.AttributeName" />
+
                                     <input type="checkbox" name="AttributeIDs" value="@attribute.AttributeID" />
                                 </td>
                                 <td>@(++i)</td>
                                 <td>
-                                    <input type="hidden" name="AttributeID" value="@attribute.AttributeID" />
-                                    <input type="hidden" name="ProductIDs" value="@attribute.ProductID" />
-                                    <input type="hidden" name="AttributeNames" value="@attribute.AttributeName" />
                                     <span class="lc-company-name">
                                         @attribute.AttributeName
                                     </span>
-
                                 </td>
                                 <td>
                                     <input name="AttributeValues" value="@attribute.AttributeValues" class="form-control" />
